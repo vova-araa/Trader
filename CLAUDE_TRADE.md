@@ -152,3 +152,7 @@ Ik kan hier later op terugkomen om terugkerende fouten of sterke setups te herke
 2. [RISK] Geef nooit een setup met RR onder 1:2 tot TP1 — omdat de edge dan te dun is.
 3. [BIAS] Trade nooit tegen de HTF-bias tenzij expliciet gevraagd — omdat counter-trend de winkans verlaagt.
 4. [PROCESS] Forceer nooit een trade uit een chart — "geen setup" is een geldig antwoord.
+5. [ENTRY] Neem altijd 0.65 mee als volwaardig fib-niveau naast 0.618 / 0.705 / 0.786 / 0.886 — omdat de live chart-layout OTE-zones markeert met 0.618 (oranje), 0.65 (geel), 0.786 (teal) en 0.886 (rood).
+6. [ENTRY] Trek altijd fibs op meerdere swing-degrees tegelijk (HTF-leg én actuele leg) en prioriteer entries waar niveaus van verschillende legs clusteren — omdat een fib-cluster sterkere confluence is dan één losse fib.
+7. [STRUCTURE] Neem altijd de gemarkeerde supply/demand-boxen en vaste referentieniveaus uit de chart-layout (o.a. Daily Open) mee in de confluence-check — omdat de entry-zones in de live workflow daarop gebouwd zijn. (Betekenis van zone-labels zoals "P+4+Micro+DO" nog door gebruiker te bevestigen.)
+8. [ENTRY] Benoem altijd de stand van de momentum-indicator (UP/DOWN) bij een setup en markeer een entry tegen de momentum-richting in expliciet als lagere conviction — omdat de live chart een momentum-oscillator als confirmatielaag gebruikt. (Exacte indicatorregels nog door gebruiker aan te leveren.)
