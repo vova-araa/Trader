@@ -28,3 +28,12 @@ Eén Zapier-call faalde tijdelijk (JWT-fout serverzijde), retry slaagde.
 ## Besluit
 
 Geen nieuwe setup, geen WhatsApp (positiemanagement, geen nieuw A/B-signaal).
+
+## Update 16:36 UTC — 4.000 GEBROKEN (flush live)
+
+Spot 3.992 (M1-RSI 2,9). Long-trigger 2 in uitvoering: flush ✓, wachten op
+reclaim. Entry alleen bij 15m-close terug boven ~4.003 (agressief) of
+H1-close boven 4.000 (conservatief); SL onder de definitieve flush-low,
+TP1 4.026, TP2 4.048, RR ≥ 1:2 verplicht op de echte low. Geen reclaim =
+breakdown = flat blijven; onder 4.000 geen betrouwbare niveaus zonder
+daily-data. Swing sell 4.133 ongewijzigd.
