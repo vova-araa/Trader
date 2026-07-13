@@ -54,3 +54,10 @@ Counter-scenario (alleen op expliciete vraag, regel 3): long-reactie vanaf
 4.070,8/4.062,4 vereist eerst een 15m CHoCH omhoog — zonder die trigger geen long.
 
 Resultaat: _in te vullen_
+
+## AFLOOP 13 jul 06:50 UTC — GEÏNVALIDEERD, order gecanceld
+
+Prijs brak in de Aziatische sessie op closes door 4.062 (0.886) zonder de
+entry-zone 4.101–4.110 te vullen. Low ~4.048, spot 4.055 bij London open.
+Sell limit 4.105 vervalt. Resultaat: 0R (niet gevuld). Les: entry-zone op de
+verse leg her-ankeren zodra een sweep-low breekt i.p.v. de oude fib vasthouden.
