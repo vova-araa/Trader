@@ -7,3 +7,10 @@ dump-origin), SL 4.037, TP1 4.000 (1:2,4), TP2 3.986 (1:3,6), TP3 3.975
 CPI 14/7 als minpunten; order vóór CPI cancelen indien niet gevuld).
 Sluit aan op open long (TP's 4.014/4.026 = flip-niveau). Alerts: 4.014 /
 4.026 / 4.041 / 3.988.
+
+## Update 20:01 UTC
+
+Spot 4.002,5 — reclaim boven 4.000 in uitvoering, higher lows intact, long
++7 pt. Fade-short 4.026 ongewijzigd van kracht (B). Long-beheer: helft
+4.014, rest 4.026, SL naar BE na H1-close > 4.000; exit bij 15m-close
+< 3.988. H1-close 21:00 UTC is het beslismoment; daarna Azië (dun).
