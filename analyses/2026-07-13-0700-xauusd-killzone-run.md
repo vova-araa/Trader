@@ -20,3 +20,10 @@ Geen nieuwe setup deze run — London opent met continuation omlaag zonder
 retrace; entries najagen op de low is tegen regel 4 (RR < 1:2 vanaf hier).
 Geen WhatsApp verstuurd: beide pending setups zijn al bij de gebruiker
 bekend en er is geen nieuw A/B-signaal.
+
+## Long-triggers (counter-trend, alleen op bevestiging — C tenzij anders)
+
+1. Sweep < 4.046 in demand-box 4.035–4.026 + 15m CHoCH omhoog → scalp-long,
+   SL onder sweep-low, target 4.070–4.085. Conflicteert met intraday-short.
+2. Flush < 4.000 + H1-rejection terug erboven → squeeze-long (kan A/B worden).
+3. H1-close > 4.153 → shorts dood, bias-flip; pullback-buys richting 4.200+.
