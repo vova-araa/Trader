@@ -28,3 +28,14 @@ Conviction:   B — HTF + structuur + timing kloppen; niveaus deels van
 
 Let op: geopolitiek (VS-Iran) kan goud plots als safe haven laten spiken —
 SL is niet optioneel. Positie bij voorkeur vóór dinsdag CPI managen.
+
+## RESULTAAT 13 jul 14:45 UTC — TP1 GERAAKT ✅
+
+Entry 4.075 (fill ~11:00 NL op de OTE-rejection, high 4.080), NY-sessie
+veegde de equal lows 4.048–4.050 en dumpte door naar 4.003. TP 4.049
+geraakt: +26 pt = ~+2,9R. Doorslaggevende driver: VS-Iran-escalatie →
+olie hoger → rate-hike-angst (rente-verhaal domineert safe-haven-verhaal).
+
+Marktstatus na exit: spot 4.003,8 — long-trigger 2 (flush < 4.000 +
+H1-reclaim) is bijna live. RSI(7) H1 = 18, extreem oversold. Niet
+short bijjagen (geen structuur-SL, geen RR — regel 2/4).
