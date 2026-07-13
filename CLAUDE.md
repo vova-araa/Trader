@@ -8,11 +8,11 @@ Lees **CLAUDE_TRADE.md** volledig voordat je een chart of dataset analyseert —
 
 ## Workflow
 
-1. Haal data op (of ontvang een screenshot van de gebruiker):
-   ```
-   python3 scripts/fetch_xauusd.py
-   ```
-   Dit schrijft `data/snapshot.json` en print een compacte samenvatting (candles, swings, auto-fib op de laatste impuls). Vereist netwerk­toegang tot de datafeeds — zie README.md als dit 403's geeft.
+1. Haal data op (of ontvang een screenshot van de gebruiker). In Claude Code-omgevingen blokkeert de netwerkpolicy directe HTTP — gebruik dan de **Zapier MCP**: app "Webhooks by Zapier", action `custom` (method GET, `return_raw_response: yes`) op:
+   - Spot: `https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD`
+   - Candles: `https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=15m&range=5d` (ook `1h&range=1mo` en `4h&range=3mo` voor HTF-bias)
+   - Let op: GC=F is de goud-future en noteert enkele dollars boven spot — kalibreer alle niveaus op de spotprijs.
+   Lokaal met vrij netwerk kan ook: `python3 scripts/fetch_xauusd.py` (schrijft `data/snapshot.json` + samenvatting).
 2. Analyseer volgens de workflow in CLAUDE_TRADE.md sectie 6 (instrument → HTF-bias → structuur → fib/OTE → template).
 3. Sla de analyse op in `analyses/YYYY-MM-DD-<instrument>-<richting>.md`.
 4. Alleen bij een A- of B-setup de gebruiker actief notificeren; bij "geen setup" volstaat de log.

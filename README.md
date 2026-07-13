@@ -21,11 +21,13 @@ Het idee: een geplande Routine start rond de kill zones (London open ~09:00 NL, 
 3. de setup logt in `analyses/` en commit;
 4. **alleen bij een A- of B-setup** een push-/e-mailnotificatie stuurt — "geen setup" blijft stil.
 
-### Vereiste: netwerkpolicy
+### Datapad: Zapier MCP (actief)
 
-De datafeeds (`query1.finance.yahoo.com`, `forex-data-feed.swissquote.com`, `stooq.com`) moeten bereikbaar zijn vanuit de Claude Code-omgeving. Op dit moment blokkeert de netwerkpolicy van de omgeving deze hosts (403 via de proxy). Oplossing: in de omgeving-instellingen op claude.ai/code de network policy verruimen (deze domeinen toestaan, of "all"). Zie https://code.claude.com/docs/en/claude-code-on-the-web.
+De netwerkpolicy van de omgeving blokkeert directe HTTP naar de datafeeds, maar via de gekoppelde **Zapier MCP** ("Webhooks by Zapier" → action `custom`, GET) zijn Swissquote-spot en Yahoo GC=F-candles live op te halen — getest en werkend. Zie CLAUDE.md voor de exacte URLs. Alternatief blijft: de network policy van de omgeving verruimen zodat `scripts/fetch_xauusd.py` direct werkt.
 
-Zodra dat staat kan de Routine aangezet worden (vraag Claude in een sessie in deze repo: "activeer de trade-routine") met schema bijv. `0 7,12 * * 1-5` (UTC ≈ London/NY kill zones, ma–vr).
+De Routine draait ma–vr op `0 7,13 * * 1-5` (UTC): 09:00 NL (London open) en 15:00 NL (NY kill zone). Notificatie bij A/B-setup gaat via WhatsApp (Zapier) + push; "geen setup" wordt alleen gelogd in `analyses/`.
+
+Optionele upgrade: TradingView-alerts per e-mail laten sturen — de Routine leest Gmail (Zapier) en neemt geraakte alertniveaus mee in de analyse.
 
 ## Semi-automatisch (huidige flow)
 
