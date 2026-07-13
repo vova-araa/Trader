@@ -32,3 +32,13 @@ Relatie met intraday-short (4.072–4.079): mag samen bestaan, maar het zijn
 twee posities dezelfde kant op — risico per positie daarop aanpassen.
 CPI-scenario: een zachte CPI kan de spike omhoog in deze zone juist leveren;
 de trade is pas interessant als de zone als weerstand reageert.
+
+## Scenario geparkeerd: daily swing short (niet actief)
+
+Grootste leg: LH ~4.343 (medio juni) → low ~4.000 (begin juli). Daily OTE:
+0.618 = 4.212 / 0.65 = 4.223 / 0.705 = 4.242 / 0.786 = 4.270, samenvallend
+met de dalende H4 200-MA (~4.230–4.270). Entry-scenario 4.212–4.270,
+SL > 4.305 (0.886 = 4.304), targets 4.026 → 4.000 → 3.9xx. Pas actueel na
+een diepe bounce (bijv. zachte CPI + dovish Warsh-testimony). Alert op
+4.200. Geen order plaatsen: te ver weg, condities onbekend. Geen derde
+gecorreleerde short stapelen vóór CPI.
