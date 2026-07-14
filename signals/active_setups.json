@@ -6,6 +6,18 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
+      "id": "2026-07-14-ote-long-4046",
+      "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4046.0,
+      "stop_loss": 4036.0,
+      "take_profits": [4080.0, 4100.0, 4125.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-15T07:00:00Z",
+      "invalidation": "15m-close onder 4036 (achter 0.886 op 4038.8) — dan flip naar short-continuation"
+    },
+    {
       "id": "2026-07-14-cpi-fade-short-4098",
       "status": "active",
       "direction": "short",
