@@ -20,3 +20,13 @@ Lees **CLAUDE_TRADE.md** volledig voordat je een chart of dataset analyseert —
 ## Taal
 
 Nederlands, concreet, met prijzen en RR. Trading-termen mogen in het Engels.
+
+## Executie-pipeline (in opbouw)
+
+Bij elke A/B-setup ook `signals/active_setups.json` bijwerken (zelfde niveaus
+als het template; C-setups NIET — die blijven advies). `kill_switch: true`
+zetten als de gebruiker "stop trading" zegt. De executor
+(`scripts/executor_ctrader.py`) plaatst de orders op het FP Markets
+cTrader-account zodra de credentials als env vars in de omgeving staan
+(CTRADER_CLIENT_ID/SECRET/ACCESS_TOKEN/ACCOUNT_ID, CTRADER_ENV=demo|live).
+Zolang die er niet zijn: alleen het signaalbestand bijhouden.
