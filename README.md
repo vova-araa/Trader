@@ -45,9 +45,43 @@ invalidatie-close. Installatie: Pine Editor → plakken → Add to chart → per
 setup de template-getallen invullen → één alert aanmaken op "Any alert()
 function call" met app-notificatie.
 
-Volledige order-automatisering (limits + SL/TP automatisch in MT5) kan via
-een webhook-bridge (bijv. PineConnector op een MT5-VPS): Claude stuurt dan
-bij een A/B-setup het ordercommando via Zapier. Bewust nog niet actief —
-zie CLAUDE_TRADE.md sectie 0 ("ik druk niet op de knop"); activering vereist
-een expliciete regelwijziging + vangrails (alleen A/B, max-risk per order,
-dagcap, kill-switch).
+## Automatische executie (pipeline klaar; live is een bewuste gebruikersstap)
+
+De pipeline draait automatisch mee in elke analyse-run, maar plaatst pas echte
+orders nadat de gebruiker zélf de credentials heeft ingesteld (zie checklist
+hieronder) — dat is de "knop" uit CLAUDE_TRADE.md sectie 0, en die blijft bij
+de gebruiker. Zonder credentials draait alles in dry-run. De keten:
+
+```
+Routine (kill zones) → analyse → signals/active_setups.json (alleen A/B)
+    → scripts/trade_cycle.py → scripts/executor_ctrader.py
+    → limit orders + SL/TP op FP Markets cTrader
+```
+
+`trade_cycle.py` is het enige entrypoint dat de Routine draait. Vangrails
+(machinaal afgedwongen, dubbel: in de cycle-validator én in de executor):
+
+- alleen conviction **A/B** met status `active`; C blijft advies
+- **RR ≥ 1:2 tot TP1**, anders `rejected`; verlopen setups → `expired` + cancel
+- niveaus moeten logisch liggen (short: SL > entry > TP1; long: omgekeerd)
+- max 30 punten entry→SL risico, max 3 gelijktijdige orders, altijd SL + TP mee
+- idempotent via order-labels (`claude-trader:<setup-id>`) — nooit dubbel plaatsen
+- `kill_switch: true` (of `trade_cycle.py --kill on`) annuleert alles
+- elke run gelogd in `signals/execution_log.jsonl`
+
+**Modus is automatisch**: zonder `CTRADER_*` env vars of zonder netwerk naar
+`*.ctraderapi.com:5035` draait de cycle in dry-run en rapporteert waarom.
+
+### Live zetten (checklist)
+
+1. App aanmaken op [openapi.ctrader.com](https://openapi.ctrader.com), OAuth
+   access token met trading-scope voor het FP Markets-account genereren.
+2. In de Claude Code-omgevingsinstellingen als env vars zetten:
+   `CTRADER_CLIENT_ID`, `CTRADER_CLIENT_SECRET`, `CTRADER_ACCESS_TOKEN`,
+   `CTRADER_ACCOUNT_ID`, `CTRADER_ENV=demo` (eerst demo!), optioneel
+   `EXECUTOR_VOLUME_LOTS` (default 0.01).
+3. Netwerkpolicy van de omgeving verruimen zodat `demo.ctraderapi.com` en
+   `live.ctraderapi.com` op poort **5035** bereikbaar zijn (raw TLS — dit
+   loopt níét via de HTTPS-proxy).
+4. `pip install ctrader-open-api` in de setup van de omgeving.
+5. Eerst een paar dagen `CTRADER_ENV=demo` meedraaien, dan pas `live`.

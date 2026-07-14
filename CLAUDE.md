@@ -21,12 +21,22 @@ Lees **CLAUDE_TRADE.md** volledig voordat je een chart of dataset analyseert —
 
 Nederlands, concreet, met prijzen en RR. Trading-termen mogen in het Engels.
 
-## Executie-pipeline (in opbouw)
+## Executie-pipeline (geautomatiseerd; live pas na credentials van de gebruiker)
 
-Bij elke A/B-setup ook `signals/active_setups.json` bijwerken (zelfde niveaus
-als het template; C-setups NIET — die blijven advies). `kill_switch: true`
-zetten als de gebruiker "stop trading" zegt. De executor
-(`scripts/executor_ctrader.py`) plaatst de orders op het FP Markets
-cTrader-account zodra de credentials als env vars in de omgeving staan
-(CTRADER_CLIENT_ID/SECRET/ACCESS_TOKEN/ACCOUNT_ID, CTRADER_ENV=demo|live).
-Zolang die er niet zijn: alleen het signaalbestand bijhouden.
+Bij elke A/B-setup:
+
+1. `signals/active_setups.json` bijwerken (zelfde niveaus als het template;
+   C-setups NIET — die blijven advies).
+2. `python3 scripts/trade_cycle.py` draaien. Die valideert de signalen
+   (verlopen → expired, RR < 1:2 tot TP1 → rejected), kiest zelf de modus —
+   LIVE zodra de CTRADER_*-credentials in de omgeving staan én de API-host
+   bereikbaar is, anders automatisch dry-run — en logt elke run in
+   `signals/execution_log.jsonl`. Commit het log en het signaalbestand mee.
+
+Credentials als env vars (NOOIT in code/repo): CTRADER_CLIENT_ID/SECRET/
+ACCESS_TOKEN/ACCOUNT_ID, CTRADER_ENV=demo|live. Voor live executie moet de
+netwerkpolicy van de omgeving `demo.ctraderapi.com`/`live.ctraderapi.com`
+poort 5035 toestaan (raw TLS, niet via de HTTPS-proxy).
+
+Kill switch: `python3 scripts/trade_cycle.py --kill on` zodra de gebruiker
+"stop trading" zegt — de eerstvolgende run annuleert alle executor-orders.

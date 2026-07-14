@@ -15,6 +15,8 @@ Vangrails (hard, niet configureerbaar zonder code-wijziging):
   - kill_switch=true in het signaalbestand => alles annuleren, niets plaatsen
   - verlopen setups (valid_until_utc) worden geannuleerd, niet geplaatst
   - elke order krijgt ALTIJD SL en TP1 mee (geen SL = geen order, regel 5)
+  - RR tot TP1 moet >= MIN_RR (1:2, regel 2) en de niveaus moeten logisch
+    liggen (short: SL > entry > TP1, long: SL < entry < TP1)
   - MAX_RISK_POINTS begrenst de afstand entry->SL; groter = order geweigerd
   - MAX_OPEN_SETUPS begrenst het aantal gelijktijdige executor-orders
   - order-label bevat het setup-id zodat orders idempotent gesynct worden
@@ -34,6 +36,7 @@ SIGNALS = Path(__file__).resolve().parent.parent / "signals" / "active_setups.js
 
 VOLUME_LOTS = float(os.environ.get("EXECUTOR_VOLUME_LOTS", "0.01"))  # microlot default
 MAX_RISK_POINTS = 30.0   # entry->SL afstand; groter = weigeren
+MIN_RR = 2.0             # minimaal 1:2 tot TP1 (harde regel 2)
 MAX_OPEN_SETUPS = 3
 LABEL_PREFIX = "claude-trader:"
 SYMBOL_NAME = "XAUUSD"
@@ -59,6 +62,17 @@ def load_signals():
             continue
         if not s.get("take_profits"):
             print(f"WEIGER {s['id']}: geen TP", file=sys.stderr)
+            continue
+        tp1 = s["take_profits"][0]
+        if abs(tp1 - s["entry"]) / risk < MIN_RR:
+            print(f"WEIGER {s['id']}: RR {abs(tp1 - s['entry']) / risk:.2f} "
+                  f"< {MIN_RR} tot TP1", file=sys.stderr)
+            continue
+        if s["direction"] == "short" and not s["stop_loss"] > s["entry"] > tp1:
+            print(f"WEIGER {s['id']}: short-niveaus onlogisch", file=sys.stderr)
+            continue
+        if s["direction"] == "long" and not s["stop_loss"] < s["entry"] < tp1:
+            print(f"WEIGER {s['id']}: long-niveaus onlogisch", file=sys.stderr)
             continue
         actionable.append(s)
     return data, actionable[:MAX_OPEN_SETUPS], expired
