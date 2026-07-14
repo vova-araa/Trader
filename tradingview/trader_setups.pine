@@ -1,0 +1,90 @@
+//@version=5
+// Trader Setups — tekent en bewaakt de setups uit analyses/ (CLAUDE_TRADE.md template)
+// Gebruik: Pine Editor → plakken → Add to chart → per setup de template-getallen invullen.
+// Alerts: klok-icoon → Create alert → Condition: deze indicator → "Any alert() function call"
+// → Notify on app. Eén alert dekt alle drie de setups.
+indicator("Trader Setups (SMC/OTE)", overlay = true)
+
+// ---------- Setup 1 ----------
+g1 = "Setup 1"
+s1_on  = input.bool(true, "Actief", group = g1)
+s1_dir = input.string("Short", "Richting", options = ["Long", "Short"], group = g1)
+s1_zhi = input.price(4028.0, "Zone bovenkant", group = g1)
+s1_zlo = input.price(4022.0, "Zone onderkant", group = g1)
+s1_ent = input.price(4026.0, "Entry", group = g1)
+s1_sl  = input.price(4037.0, "Stop Loss / invalidatie", group = g1)
+s1_tp1 = input.price(4005.0, "TP1", group = g1)
+s1_tp2 = input.price(3986.0, "TP2 (0 = uit)", group = g1)
+s1_tp3 = input.price(3975.0, "TP3 (0 = uit)", group = g1)
+
+// ---------- Setup 2 ----------
+g2 = "Setup 2"
+s2_on  = input.bool(false, "Actief", group = g2)
+s2_dir = input.string("Short", "Richting", options = ["Long", "Short"], group = g2)
+s2_zhi = input.price(4140.0, "Zone bovenkant", group = g2)
+s2_zlo = input.price(4126.0, "Zone onderkant", group = g2)
+s2_ent = input.price(4133.0, "Entry", group = g2)
+s2_sl  = input.price(4157.0, "Stop Loss / invalidatie", group = g2)
+s2_tp1 = input.price(4048.0, "TP1", group = g2)
+s2_tp2 = input.price(4026.0, "TP2 (0 = uit)", group = g2)
+s2_tp3 = input.price(3985.0, "TP3 (0 = uit)", group = g2)
+
+// ---------- Setup 3 ----------
+g3 = "Setup 3"
+s3_on  = input.bool(false, "Actief", group = g3)
+s3_dir = input.string("Long", "Richting", options = ["Long", "Short"], group = g3)
+s3_zhi = input.price(3993.0, "Zone bovenkant", group = g3)
+s3_zlo = input.price(3990.0, "Zone onderkant", group = g3)
+s3_ent = input.price(3991.0, "Entry", group = g3)
+s3_sl  = input.price(3981.0, "Stop Loss / invalidatie", group = g3)
+s3_tp1 = input.price(4014.0, "TP1", group = g3)
+s3_tp2 = input.price(4026.0, "TP2 (0 = uit)", group = g3)
+s3_tp3 = input.price(0.0,    "TP3 (0 = uit)", group = g3)
+
+colZone(dir) => dir == "Short" ? color.new(color.red, 82) : color.new(color.teal, 82)
+colEnt = color.new(color.blue, 0)
+colSL  = color.new(color.red, 0)
+colTP  = color.new(color.green, 0)
+
+// Zones als fill tussen twee plots (werkt op elk chart-type)
+p1hi = plot(s1_on ? s1_zhi : na, "S1 zone hi", color = color.new(color.gray, 100), editable = false)
+p1lo = plot(s1_on ? s1_zlo : na, "S1 zone lo", color = color.new(color.gray, 100), editable = false)
+fill(p1hi, p1lo, color = s1_on ? colZone(s1_dir) : na, title = "S1 zone")
+p2hi = plot(s2_on ? s2_zhi : na, "S2 zone hi", color = color.new(color.gray, 100), editable = false)
+p2lo = plot(s2_on ? s2_zlo : na, "S2 zone lo", color = color.new(color.gray, 100), editable = false)
+fill(p2hi, p2lo, color = s2_on ? colZone(s2_dir) : na, title = "S2 zone")
+p3hi = plot(s3_on ? s3_zhi : na, "S3 zone hi", color = color.new(color.gray, 100), editable = false)
+p3lo = plot(s3_on ? s3_zlo : na, "S3 zone lo", color = color.new(color.gray, 100), editable = false)
+fill(p3hi, p3lo, color = s3_on ? colZone(s3_dir) : na, title = "S3 zone")
+
+// Entry / SL / TP-lijnen
+plot(s1_on ? s1_ent : na, "S1 entry", colEnt, 2, plot.style_linebr)
+plot(s1_on ? s1_sl : na, "S1 SL", colSL, 1, plot.style_linebr)
+plot(s1_on ? s1_tp1 : na, "S1 TP1", colTP, 1, plot.style_linebr)
+plot(s1_on and s1_tp2 > 0 ? s1_tp2 : na, "S1 TP2", colTP, 1, plot.style_linebr)
+plot(s1_on and s1_tp3 > 0 ? s1_tp3 : na, "S1 TP3", colTP, 1, plot.style_linebr)
+plot(s2_on ? s2_ent : na, "S2 entry", colEnt, 2, plot.style_linebr)
+plot(s2_on ? s2_sl : na, "S2 SL", colSL, 1, plot.style_linebr)
+plot(s2_on ? s2_tp1 : na, "S2 TP1", colTP, 1, plot.style_linebr)
+plot(s2_on and s2_tp2 > 0 ? s2_tp2 : na, "S2 TP2", colTP, 1, plot.style_linebr)
+plot(s2_on and s2_tp3 > 0 ? s2_tp3 : na, "S2 TP3", colTP, 1, plot.style_linebr)
+plot(s3_on ? s3_ent : na, "S3 entry", colEnt, 2, plot.style_linebr)
+plot(s3_on ? s3_sl : na, "S3 SL", colSL, 1, plot.style_linebr)
+plot(s3_on ? s3_tp1 : na, "S3 TP1", colTP, 1, plot.style_linebr)
+plot(s3_on and s3_tp2 > 0 ? s3_tp2 : na, "S3 TP2", colTP, 1, plot.style_linebr)
+plot(s3_on and s3_tp3 > 0 ? s3_tp3 : na, "S3 TP3", colTP, 1, plot.style_linebr)
+
+// ---------- Bewaking: alert() bij zone-touch, entry-fill en invalidatie ----------
+inZone(hi, lo) => high >= lo and low <= hi
+f_watch(on, name, dir, zhi, zlo, ent, sl) =>
+    if on and barstate.isconfirmed
+        if inZone(zhi, zlo) and not inZone(zhi, zlo)[1]
+            alert(name + " (" + dir + "): prijs in entry-zone " + str.tostring(zlo) + "–" + str.tostring(zhi), alert.freq_once_per_bar)
+        if ta.cross(close, ent) != 0 ? true : (low <= ent and high >= ent and not (low[1] <= ent and high[1] >= ent))
+            alert(name + " (" + dir + "): entry " + str.tostring(ent) + " geraakt", alert.freq_once_per_bar)
+        if (dir == "Short" and close > sl) or (dir == "Long" and close < sl)
+            alert(name + " (" + dir + "): INVALIDATIE — close voorbij " + str.tostring(sl), alert.freq_once_per_bar)
+
+f_watch(s1_on, "Setup 1", s1_dir, s1_zhi, s1_zlo, s1_ent, s1_sl)
+f_watch(s2_on, "Setup 2", s2_dir, s2_zhi, s2_zlo, s2_ent, s2_sl)
+f_watch(s3_on, "Setup 3", s3_dir, s3_zhi, s3_zlo, s3_ent, s3_sl)

@@ -36,3 +36,18 @@ Zonder netwerkverruiming werkt de screenshot-flow altijd: stuur 1H + 15m charts 
 ## Disclaimer
 
 Trade-ideeën en analyse, geen financieel advies. De beslissing en het risico zijn aan jou.
+
+## TradingView-integratie
+
+`tradingview/trader_setups.pine` — indicator die de actieve setups tekent
+(zone-box, entry, SL, TP1–3) en bewaakt: alert bij zone-touch, entry-fill en
+invalidatie-close. Installatie: Pine Editor → plakken → Add to chart → per
+setup de template-getallen invullen → één alert aanmaken op "Any alert()
+function call" met app-notificatie.
+
+Volledige order-automatisering (limits + SL/TP automatisch in MT5) kan via
+een webhook-bridge (bijv. PineConnector op een MT5-VPS): Claude stuurt dan
+bij een A/B-setup het ordercommando via Zapier. Bewust nog niet actief —
+zie CLAUDE_TRADE.md sectie 0 ("ik druk niet op de knop"); activering vereist
+een expliciete regelwijziging + vangrails (alleen A/B, max-risk per order,
+dagcap, kill-switch).
