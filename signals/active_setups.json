@@ -1,25 +1,46 @@
 {
   "version": 1,
-  "updated_utc": "2026-07-14T13:12:17Z",
+  "updated_utc": "2026-07-15T07:11:49Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-07-14-ote-long-4046",
+      "id": "2026-07-15-retest-short-4048",
       "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4048.0,
+      "stop_loss": 4058.0,
+      "take_profits": [
+        4021.0,
+        4004.0,
+        3981.0
+      ],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-15T20:00:00Z",
+      "invalidation": "H1-close boven 4058 spot (achter 0.886 op 4057.8) — dan is de flip-retest gefaald"
+    },
+    {
+      "id": "2026-07-14-ote-long-4046",
+      "status": "stopped",
       "direction": "long",
       "order_type": "limit",
       "entry": 4046.0,
       "stop_loss": 4036.0,
-      "take_profits": [4080.0, 4100.0, 4125.0],
+      "take_profits": [
+        4080.0,
+        4100.0,
+        4125.0
+      ],
       "conviction": "B",
       "valid_until_utc": "2026-07-15T07:00:00Z",
-      "invalidation": "15m-close onder 4036 (achter 0.886 op 4038.8) — dan flip naar short-continuation"
+      "invalidation": "15m-close onder 4036 (achter 0.886 op 4038.8) — dan flip naar short-continuation",
+      "result": "dry-run: gevuld ~20:30 UTC 14-07, SL 4036 geraakt ~02:25 UTC 15-07 = -1R; les: counter-HTF long niet blind als limit in de OTE leggen maar op 15m-CHoCH-bevestiging wachten"
     },
     {
       "id": "2026-07-14-cpi-fade-short-4098",
-      "status": "active",
+      "status": "expired",
       "direction": "short",
       "order_type": "limit",
       "entry": 4098.0,
