@@ -84,3 +84,24 @@ bestand elke cyclus opnieuw.
 Verifieer bij de eerste live/demo-run de geplaatste order-grootte handmatig
 in de cTrader-UI — de volume-conversie is gebaseerd op de officiële
 protobuf-specificatie maar nog niet tegen een echte server getest.
+
+## Alternatief: HFT-scalper als MT5 Expert Advisor
+
+`mt5/TraderHFT_XAUUSD.mq5` is een losse MQL5-poort van dezelfde HFT-strategie
+(Bollinger+RSI mean-reversion op M1, spread-/sessiefilter) mét dezelfde
+vangrails (risk-based lotgrootte, marge-check, consecutive-loss circuit
+breaker, dag-verlieslimiet). Dit is een **alternatief voor wie op MT5 wil
+draaien in plaats van de cTrader-superbot** — geen vervanging, en de twee
+delen geen state (elk platform telt zijn eigen verlies-reeksen).
+
+**Niet hier gecompileerd/getest** — MetaEditor en de Strategy Tester zijn
+Windows-only en draaien niet in deze omgeving. Gebruik:
+1. Kopieer het bestand naar `MQL5/Experts/` in je MT5-datamap (Bestand →
+   Openen data-map).
+2. Open het in MetaEditor, compileer (F7), fix eventuele meldingen.
+3. Draai het EERST in de **Strategy Tester** op historische XAUUSD-data
+   (Bollinger/RSI-instellingen staan in de EA-inputs) voor je 'm live/demo
+   op een chart zet.
+4. Kill switch zonder herstart: zet in het Terminal-venster (Tools →
+   Global Variables) `TraderHFT_KillSwitch` op `1` — de EA sluit dan al
+   zijn posities en stopt met nieuwe entries.
