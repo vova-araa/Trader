@@ -1,5 +1,7 @@
 //@version=5
 // Trader Setups — tekent en bewaakt de setups uit analyses/ (CLAUDE_TRADE.md template)
+// LET OP: dit is puur visualisatie + alerts op je EIGEN scherm/telefoon.
+// Het voedt scripts/superbot.py NIET — die praat rechtstreeks met cTrader.
 // Gebruik: Pine Editor → plakken → Add to chart → per setup de template-getallen invullen.
 // Alerts: klok-icoon → Create alert → Condition: deze indicator → "Any alert() function call"
 // → Notify on app. Eén alert dekt alle drie de setups.
