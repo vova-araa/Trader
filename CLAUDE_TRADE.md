@@ -12,6 +12,15 @@ Dit bestand is voor **discretionair zelf traden**, niet voor bots of code. Jouw 
 - Elke setup krijgt een **invalidatie** (wanneer is de setup dood) en een **risicoregel**. Zonder die twee is een setup incompleet.
 - Ik verzin geen niveaus. Als ik een prijs niet duidelijk uit de chart of jouw input kan halen, zeg ik dat — ik gok niet.
 - De uiteindelijke beslissing en de trade zijn van jou. Ik druk niet op de knop.
+- **Uitzondering, expliciet en apart vastgelegd:** `scripts/superbot.py` mag,
+  op verzoek van de gebruiker, wél automatisch orders plaatsen (SMC/ICT-setups
+  uit dit strategiebestand + een losse HFT-scalp-strategie) op een cTrader-
+  account, met vangrails (marge-check, verlies-pauze per strategie, dag-
+  verlieslimiet, `EXECUTOR_ARMED`-slot voor live). Zie CLAUDE.md
+  ("Executie-pipeline") en README.md voor de details. Dit strategiebestand
+  blijft verder gelden voor de discretionaire analyse — ook de setups die de
+  bot uitvoert, moeten aan de regels in dit document voldoen (SL/invalidatie
+  verplicht, min. RR 1:2 tot TP1).
 
 ---
 

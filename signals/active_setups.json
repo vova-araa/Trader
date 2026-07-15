@@ -3,7 +3,12 @@
   "updated_utc": "2026-07-14T02:05:00Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
-  "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
+  "notes": "Machine-leesbaar signaalbestand. scripts/superbot.py (de persistente bot) plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders EN open posities van de bot sluiten, niets nieuws plaatsen. risk_state wordt door de bot zelf bijgehouden (pauzes na verlies-reeks, dag-verlieslimiet).",
+  "risk_state": {
+    "smc_paused_until_utc": null,
+    "hft_paused_until_utc": null,
+    "daily_loss_halt_date": null
+  },
   "setups": [
     {
       "id": "2026-07-14-fade-short-4026",
