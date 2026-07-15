@@ -42,8 +42,8 @@ input double InpRSIOversold          = 30.0;
 input double InpSLDollars            = 10.0;    // SL-afstand in $ (XAUUSD-prijs, geen MQL5-"points")
 input double InpTPDollars            = 18.0;    // TP-afstand in $ (RR ~1.8)
 input double InpMaxSpreadDollars     = 5.0;     // skip entry als spread hoger is
-input int    InpSessionStartUTC      = 7;       // Londen-open
-input int    InpSessionEndUTC        = 20;      // NY-sluit
+input int    InpSessionStartUTC      = 0;       // 0 = 24/5, geen sessiefilter
+input int    InpSessionEndUTC        = 24;      // 24 = 24/5, geen sessiefilter
 input int    InpCooldownSeconds      = 300;
 
 input group "Overig"
