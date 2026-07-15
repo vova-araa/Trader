@@ -41,10 +41,14 @@ input double InpRSIOverbought        = 70.0;
 input double InpRSIOversold          = 30.0;
 input double InpSLDollars            = 10.0;    // SL-afstand in $ (XAUUSD-prijs, geen MQL5-"points")
 input double InpTPDollars            = 18.0;    // TP-afstand in $ (RR ~1.8)
-input double InpMaxSpreadDollars     = 5.0;     // skip entry als spread hoger is
+// 3.0 i.p.v. 5.0: gekalibreerd op echte GC=F 5m-data (15-7-2026, 5 dagen) —
+// normale raw-spread << $1, dus $3 dekt de normale volatiliteit ruim maar
+// blokkeert nog steeds de dure momenten t.o.v. de $18 TP.
+input double InpMaxSpreadDollars     = 3.0;     // skip entry als spread hoger is
 input int    InpSessionStartUTC      = 0;       // 0 = 24/5, geen sessiefilter
 input int    InpSessionEndUTC        = 24;      // 24 = 24/5, geen sessiefilter
 input int    InpCooldownSeconds      = 300;
+input double InpVolSpikeMult         = 4.0;     // skip entry als laatste M1-bar > mult x ATR(14) (newsspike-guard)
 
 input group "Overig"
 input ulong  InpMagic                = 20260715;
@@ -53,6 +57,7 @@ input string InpKillSwitchGlobalVar  = "TraderHFT_KillSwitch"; // zet deze termi
 //---------------------------------------------------------------- state ---
 int      bbHandle = INVALID_HANDLE;
 int      rsiHandle = INVALID_HANDLE;
+int      atrHandle = INVALID_HANDLE;
 datetime lastTradeTime = 0;
 datetime pausedUntil = 0;
 datetime lastBarTime = 0;
@@ -65,9 +70,10 @@ int OnInit()
 {
    bbHandle = iBands(_Symbol, PERIOD_M1, InpBBPeriod, 0, InpBBDeviation, PRICE_CLOSE);
    rsiHandle = iRSI(_Symbol, PERIOD_M1, InpRSIPeriod, PRICE_CLOSE);
-   if(bbHandle == INVALID_HANDLE || rsiHandle == INVALID_HANDLE)
+   atrHandle = iATR(_Symbol, PERIOD_M1, 14);
+   if(bbHandle == INVALID_HANDLE || rsiHandle == INVALID_HANDLE || atrHandle == INVALID_HANDLE)
    {
-      Print("Indicator-init mislukt (Bollinger/RSI)");
+      Print("Indicator-init mislukt (Bollinger/RSI/ATR)");
       return INIT_FAILED;
    }
    trade.SetExpertMagicNumber(InpMagic);
@@ -82,6 +88,7 @@ void OnDeinit(const int reason)
 {
    if(bbHandle != INVALID_HANDLE) IndicatorRelease(bbHandle);
    if(rsiHandle != INVALID_HANDLE) IndicatorRelease(rsiHandle);
+   if(atrHandle != INVALID_HANDLE) IndicatorRelease(atrHandle);
 }
 
 //+------------------------------------------------------------------+
@@ -273,6 +280,19 @@ bool MarginOk(double lots, ENUM_ORDER_TYPE orderType, double price)
    return true;
 }
 
+// Newsspike-guard: skip entries als de laatst gesloten M1-bar veel groter is
+// dan ATR(14) — gekalibreerd op echte GC=F-data waarin een newsspike-bar
+// ~16x de gemiddelde M5-range bereikte. Voorkomt instappen vlak na zo'n spike.
+bool IsVolatilitySpike()
+{
+   double atr[];
+   ArraySetAsSeries(atr, true);
+   if(CopyBuffer(atrHandle, 0, 1, 1, atr) <= 0) return false; // bar 1 = laatst gesloten
+   if(atr[0] <= 0) return false;
+   double lastRange = iHigh(_Symbol, PERIOD_M1, 1) - iLow(_Symbol, PERIOD_M1, 1);
+   return lastRange > InpVolSpikeMult * atr[0];
+}
+
 //------------------------------------------------------------- signaal --
 // Retourneert 1 (long), -1 (short) of 0 (geen signaal). Zelfde regel als
 // hft_signal() in scripts/superbot.py: Bollinger-extreem + RSI-bevestiging.
@@ -357,6 +377,11 @@ void OnTick()
    if(TimeCurrent() < pausedUntil) return;
    if(!InSession(nowGMT)) return;
    if(TimeCurrent() - lastTradeTime < InpCooldownSeconds) return;
+   if(IsVolatilitySpike())
+   {
+      Print("Skip: volatility spike (laatste bar > ", InpVolSpikeMult, "x ATR)");
+      return;
+   }
 
    int signal = GetSignal();
    if(signal == 0) return;

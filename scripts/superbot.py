@@ -102,7 +102,10 @@ CFG = {
     "hft_enabled": _b("HFT_ENABLED", True),
     "hft_sl_points": _f("HFT_SL_POINTS", 10.0),
     "hft_tp_points": _f("HFT_TP_POINTS", 18.0),
-    "hft_max_spread_points": _f("HFT_MAX_SPREAD_POINTS", 5.0),
+    # 3.0 i.p.v. eerdere 5.0: gekalibreerd op echte GC=F 5m-data (15-7-2026,
+    # 5 dagen) — normale raw-spread << $1, dus $3 dekt ruim de normale
+    # volatiliteit maar blokkeert nog steeds de dure momenten t.o.v. de $18 TP.
+    "hft_max_spread_points": _f("HFT_MAX_SPREAD_POINTS", 3.0),
     "hft_session_start_utc": _i("HFT_SESSION_START_UTC", 7),
     "hft_session_end_utc": _i("HFT_SESSION_END_UTC", 20),
     "hft_cooldown_seconds": _i("HFT_COOLDOWN_SECONDS", 300),
@@ -113,6 +116,13 @@ CFG = {
     "hft_rsi_oversold": _f("HFT_RSI_OVERSOLD", 30.0),
     "min_volume_lots": _f("MIN_VOLUME_LOTS", 0.01),
     "lot_step": _f("LOT_STEP", 0.01),
+    # Volatility-spike guard: gebaseerd op dezelfde dataset — de M5-candles
+    # bevatten een 76.5$ outlier-bar tegen een gemiddelde van 4.68$ (~16x),
+    # vrijwel zeker een newsspike (CPI/NFP). Skip entries als de laatst
+    # gesloten M1-bar > mult keer de gemiddelde range van de laatste
+    # `lookback` bars is — voorkomt instappen vlak na/tijdens zo'n spike.
+    "hft_vol_spike_mult": _f("HFT_VOL_SPIKE_MULT", 4.0),
+    "hft_vol_lookback": _i("HFT_VOL_LOOKBACK", 20),
 }
 
 MAX_OPEN_SMC_SETUPS = 3  # ongewijzigde vangrail uit executor_ctrader.py
@@ -179,6 +189,20 @@ def hft_signal(closes, cfg=CFG):
     if last <= lower and r <= cfg["hft_rsi_oversold"]:
         return "long"
     return None
+
+
+def is_volatility_spike(ranges, cfg=CFG):
+    """ranges: laatste bar-ranges (high-low), oudste eerst, laatste = net
+    gesloten bar. True als de laatste bar veel groter is dan het recente
+    gemiddelde (newsspike-achtig) — dan skippen we een entry."""
+    lookback = cfg["hft_vol_lookback"]
+    if len(ranges) < lookback + 1:
+        return False
+    recent = ranges[-(lookback + 1):-1]
+    avg = sma(recent)
+    if avg <= 0:
+        return False
+    return ranges[-1] > cfg["hft_vol_spike_mult"] * avg
 
 
 def in_session(dt_utc, cfg=CFG):
@@ -308,6 +332,14 @@ def self_test():
     print(f"  10:00 UTC in_session={in_} (verwacht True), 02:00 UTC in_session={out_} (verwacht False)")
     assert in_ and not out_
 
+    print("== self-test: volatility-spike guard ==")
+    normal_ranges = [2.0 + (i % 3) * 0.3 for i in range(25)]
+    spike_ranges = normal_ranges + [15.0]  # ~7x het gemiddelde -> spike
+    calm = is_volatility_spike(normal_ranges)
+    spike = is_volatility_spike(spike_ranges)
+    print(f"  normale reeks spike={calm} (verwacht False), na newsspike-bar spike={spike} (verwacht True)")
+    assert not calm and spike
+
     print("\nAlle pure-logica self-tests geslaagd. Dit test GEEN live orderplaatsing,")
     print("marge- of volume-scaling tegen de echte server — verifieer de eerste")
     print("orders handmatig in de cTrader-UI voordat de bot onbeheerd draait.")
@@ -347,6 +379,7 @@ def run_live():
     state = {
         "symbol_id": None, "digits": 2, "lot_size": 100,
         "closes": deque(maxlen=200),
+        "ranges": deque(maxlen=200),
         "last_bid": None, "last_ask": None,
         "last_hft_trade_ts": 0.0,
         "position_labels": {},
@@ -554,6 +587,10 @@ def run_live():
             return
         if len(state["closes"]) < max(CFG["hft_bb_period"], CFG["hft_rsi_period"] + 1):
             return
+        if is_volatility_spike(list(state["ranges"])):
+            log_event({"event": "hft_skip_volatility_spike",
+                       "last_range": state["ranges"][-1] if state["ranges"] else None})
+            return
 
         sig = hft_signal(list(state["closes"]))
         if sig is None:
@@ -583,13 +620,16 @@ def run_live():
 
         def got(msg):
             res = Protobuf.extract(msg)
-            closes = []
+            closes, ranges = [], []
             for tb in res.trendbar:
                 low = scaled(tb.low, state["digits"])
+                high = low + scaled(tb.deltaHigh, state["digits"])
                 close = low + scaled(tb.deltaClose, state["digits"])
                 closes.append(close)
+                ranges.append(high - low)
             if closes:
                 state["closes"] = deque(closes, maxlen=200)
+                state["ranges"] = deque(ranges, maxlen=200)
 
         d = client.send(req)
         d.addCallback(got).addErrback(fail)
