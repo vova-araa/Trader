@@ -6,8 +6,21 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-07-16-sweep-long-3984",
+      "id": "2026-07-17-lowflip-short-4000",
       "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4000.0,
+      "stop_loss": 4013.0,
+      "take_profits": [3970.0, 3950.0, 3910.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-17T12:00:00Z",
+      "invalidation": "H1-close boven 4013 (achter 0.886 op 4012.5); hard cancel 12:00 UTC (Rule 12); London-run 07:00 herbeoordeelt"
+    },
+    {
+      "id": "2026-07-16-sweep-long-3984",
+      "status": "stopped",
+      "result": "dry-run: gevuld ~16:15 UTC, SL 3972 geraakt ~20:00 UTC = -1R; reclaim van de juli-low faalde — acceptatie eronder",
       "direction": "long",
       "order_type": "limit",
       "entry": 3984.0,
@@ -19,7 +32,8 @@
     },
     {
       "id": "2026-07-16-breakdown-short-4016",
-      "status": "active",
+      "status": "closed_tp1",
+      "result": "dry-run: gevuld ~15:00 UTC op de rally naar 4018, TP1 3981 geraakt ~19:45 UTC = +2.5R — eerste dry-run-winnaar; bracket met sweep-long werkte (short won, long -1R, netto dag +1.5R)",
       "direction": "short",
       "order_type": "limit",
       "entry": 4016.0,
