@@ -6,6 +6,18 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
+      "id": "2026-07-16-flip-short-4052",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4052.0,
+      "stop_loss": 4066.0,
+      "take_profits": [4019.0, 4004.0, 3981.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-16T12:00:00Z",
+      "invalidation": "H1-close boven 4066 (achter 0.886 op 4064.1); hard cancel 12:00 UTC (US-datavenster, Rule 12)"
+    },
+    {
       "id": "2026-07-15-retest-short-4048",
       "status": "stopped",
       "result": "dry-run: gevuld in de 12:45 UTC news-spike, SL 4058 direct geraakt = -1R; les: pending orders nooit zonder event-check door het 12:30-14:00 UTC US-datavenster laten lopen (Learned Rule 12)",
