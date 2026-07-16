@@ -6,6 +6,18 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
+      "id": "2026-07-16-sweep-long-3984",
+      "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 3984.0,
+      "stop_loss": 3972.0,
+      "take_profits": [4013.0, 4030.0, 4052.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-16T20:00:00Z",
+      "invalidation": "15m-close onder 3975 (onder de sweep-low) — bevestigde 15m-CHoCH omhoog staat (higher low 3984 + break 4009), Rule 13 voldaan"
+    },
+    {
       "id": "2026-07-16-breakdown-short-4016",
       "status": "active",
       "direction": "short",
