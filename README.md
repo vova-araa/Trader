@@ -25,7 +25,9 @@ Het idee: een geplande Routine start rond de kill zones (London open ~09:00 NL, 
 
 De netwerkpolicy van de omgeving blokkeert directe HTTP naar de datafeeds, maar via de gekoppelde **Zapier MCP** ("Webhooks by Zapier" → action `custom`, GET) zijn Swissquote-spot en Yahoo GC=F-candles live op te halen — getest en werkend. Zie CLAUDE.md voor de exacte URLs. Alternatief blijft: de network policy van de omgeving verruimen zodat `scripts/fetch_xauusd.py` direct werkt.
 
-De Routine draait ma–vr op `0 7,13 * * 1-5` (UTC): 09:00 NL (London open) en 15:00 NL (NY kill zone). Notificatie bij A/B-setup gaat via WhatsApp (Zapier) + push; "geen setup" wordt alleen gelogd in `analyses/`.
+De Routine draait ma–vr op `0 7,13,19 * * 1-5` (UTC): 09:00 NL (London open), 15:00 NL (NY kill zone) en 21:00 NL (avondrun: order-expiries, daily close-beoordeling, overnight-speelboek). Notificatie bij A/B-setup gaat via WhatsApp (Zapier) + push; "geen setup" wordt alleen gelogd in `analyses/`.
+
+Live-executie aanzetten: zie `docs/LIVE_SETUP.md`; verifieer met `python3 scripts/check_live_ready.py`.
 
 Optionele upgrade: TradingView-alerts per e-mail laten sturen — de Routine leest Gmail (Zapier) en neemt geraakte alertniveaus mee in de analyse.
 

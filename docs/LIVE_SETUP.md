@@ -44,7 +44,9 @@ In de **environment settings** van deze omgeving:
 2. **Network policy**: sta `demo.ctraderapi.com` en `live.ctraderapi.com` toe
    op poort **5035** (raw TLS — dit loopt níét via de HTTPS-proxy, dus de
    domein-allowlist moet dit expliciet toestaan of de policy moet ruimer).
-3. **Setup script** van de omgeving: `pip install ctrader-open-api` toevoegen.
+3. **Setup script** van de omgeving toevoegen:
+   `pip install ctrader-open-api cffi service_identity && pip install --ignore-installed --upgrade pyopenssl cryptography`
+   (de laatste twee lossen een versieconflict met de systeem-cryptography op).
 4. Container herstarten zodat de nieuwe env vars en policy actief zijn.
 
 ## Wat er daarna gebeurt (vanzelf)
