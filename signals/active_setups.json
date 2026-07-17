@@ -7,7 +7,8 @@
   "setups": [
     {
       "id": "2026-07-17-fridayflip-short-3984",
-      "status": "active",
+      "status": "stopped",
+      "result": "dry-run: gevuld ~13:30 UTC in de covering-squeeze, SL 3994 binnen dezelfde candle geraakt = -1R; het benoemde vrijdagmiddag-squeeze-risico kwam exact uit — V-reversal 3963->4029; les: na een 2e violente koop van een verse low binnen 1 week het mean-reversion-scenario zwaarder wegen",
       "direction": "short",
       "order_type": "limit",
       "entry": 3984.0,
