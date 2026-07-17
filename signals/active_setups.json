@@ -8,6 +8,7 @@
     {
       "id": "2026-07-17-lowflip-short-4000",
       "status": "active",
+      "note": "dry-run: GEVULD ~03:20 UTC op de Asia-spike naar 4005 (0.705-tag); positie loopt, SL 4013 / TP1 3970; advies SL naar BE vóór 12:30 UTC US-data",
       "direction": "short",
       "order_type": "limit",
       "entry": 4000.0,
