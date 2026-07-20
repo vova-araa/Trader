@@ -8,7 +8,8 @@
     {
       "id": "2026-07-20-supply-short-4030",
       "status": "active",
-      "note": "dry-run: GEVULD ~11:45 UTC — spike naar 4044,7 spot (future 4046) tagde de zone en werd verworpen; SL 4046 hield op ~1,3pt na. Positie nu +21 (spot 4009). Advies: SL naar BE (4030) bij 15m-close onder 4010.",
+      "note": "dry-run: GEVULD ~11:45 UTC @ 4030 (wick 4044,7 hield onder SL). NY-leg naar 4002 (TP1 3986 NIET geraakt), bounce naar 4006. Positie +24 open. Avondbeheer: SL naar BE 4030 (risicoloos), runner blijft richting 3986/3968 overnight; pending-limit verloopt 20:00 UTC maar de gevulde positie loopt door.",
+      "stop_loss_note": "verplaatst naar BE 4030",
       "direction": "short",
       "order_type": "limit",
       "entry": 4030.0,
