@@ -8,6 +8,7 @@
     {
       "id": "2026-07-20-supply-short-4030",
       "status": "active",
+      "note": "dry-run: GEVULD ~11:45 UTC — spike naar 4044,7 spot (future 4046) tagde de zone en werd verworpen; SL 4046 hield op ~1,3pt na. Positie nu +21 (spot 4009). Advies: SL naar BE (4030) bij 15m-close onder 4010.",
       "direction": "short",
       "order_type": "limit",
       "entry": 4030.0,
