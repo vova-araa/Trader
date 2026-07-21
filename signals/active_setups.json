@@ -7,9 +7,8 @@
   "setups": [
     {
       "id": "2026-07-20-supply-short-4030",
-      "status": "active",
-      "note": "dry-run: GEVULD ~11:45 UTC @ 4030 (wick 4044,7 hield onder SL). NY-leg naar 4002 (TP1 3986 NIET geraakt), bounce naar 4006. Positie +24 open. Avondbeheer: SL naar BE 4030 (risicoloos), runner blijft richting 3986/3968 overnight; pending-limit verloopt 20:00 UTC maar de gevulde positie loopt door.",
-      "stop_loss_note": "verplaatst naar BE 4030",
+      "status": "closed_be",
+      "result": "dry-run: gevuld @ 4030, SL naar BE gezet in de avondrun; overnight-rally brak terug door 4030 en sloot de positie op breakeven = 0R (na +24 open). De BE-stop voorkwam dat een +24 winnaar een verliezer werd toen de range 69pt omhoog brak — precies waarvoor BE dient.",
       "direction": "short",
       "order_type": "limit",
       "entry": 4030.0,
