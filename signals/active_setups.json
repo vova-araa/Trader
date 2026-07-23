@@ -6,6 +6,18 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
+      "id": "2026-07-23-breakdown-retest-short-4058",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4058.0,
+      "stop_loss": 4074.0,
+      "take_profits": [4006.0, 3980.0, 3963.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-23T20:00:00Z",
+      "invalidation": "H1-close boven 4074 (terug in de gebroken 4052-4090 zone); expiry 20:00 UTC. Trend-mee: weekly bearish + intraday-reversal (4090/4052 verloren)."
+    },
+    {
       "id": "2026-07-20-supply-short-4030",
       "status": "closed_be",
       "result": "dry-run: gevuld @ 4030, SL naar BE gezet in de avondrun; overnight-rally brak terug door 4030 en sloot de positie op breakeven = 0R (na +24 open). De BE-stop voorkwam dat een +24 winnaar een verliezer werd toen de range 69pt omhoog brak — precies waarvoor BE dient.",
