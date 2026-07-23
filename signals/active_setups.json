@@ -14,8 +14,9 @@
       "stop_loss": 4074.0,
       "take_profits": [4006.0, 3980.0, 3963.0],
       "conviction": "B",
-      "valid_until_utc": "2026-07-23T20:00:00Z",
-      "invalidation": "H1-close boven 4074 (terug in de gebroken 4052-4090 zone); expiry 20:00 UTC. Trend-mee: weekly bearish + intraday-reversal (4090/4052 verloren)."
+      "valid_until_utc": "2026-07-24T12:00:00Z",
+      "note": "dry-run: NIET gevuld — bounce stokte op spot ~4056 (2pt onder entry) en werd verworpen = zone bevestigd als resistance. Geldigheid verlengd tot vr 12:00 UTC (vóór US-data, Rule 12) zodat de retest-short overnight/Fri-London armed blijft.",
+      "invalidation": "H1-close boven 4074 (terug in de gebroken 4052-4090 zone); hard expiry vr 12:00 UTC (Rule 12). Trend-mee: weekly bearish + intraday-reversal (4090/4052 verloren)."
     },
     {
       "id": "2026-07-20-supply-short-4030",
