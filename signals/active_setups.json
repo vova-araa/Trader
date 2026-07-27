@@ -8,6 +8,7 @@
     {
       "id": "2026-07-27-gap-retest-short-4105",
       "status": "active",
+      "note": "dry-run: GEVULD ~London/vroege-NY op de tag van de resistance (future 4107-4108 = spot ~4105, bovenkant van de zone). Positie nu +22 (spot 4082,7), richting TP1 4074. Advies: SL naar BE 4105 (risicoloos), partial bij 4074, runner naar 4052/4045.",
       "direction": "short",
       "order_type": "limit",
       "entry": 4105.0,
