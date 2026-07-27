@@ -6,6 +6,18 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
+      "id": "2026-07-27-gap-retest-short-4105",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4105.0,
+      "stop_loss": 4118.0,
+      "take_profits": [4074.0, 4052.0, 4045.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-27T20:00:00Z",
+      "invalidation": "H1-close boven 4118 (boven de Sunday-high ~4115 en CPI-high 4107); dan loopt de gap door richting 4140. Trend-mee weekly: short de gap-retest van de CPI-high resistance, gap-fill richting 4045."
+    },
+    {
       "id": "2026-07-23-breakdown-retest-short-4058",
       "status": "expired",
       "direction": "short",
