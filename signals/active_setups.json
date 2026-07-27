@@ -7,8 +7,8 @@
   "setups": [
     {
       "id": "2026-07-27-gap-retest-short-4105",
-      "status": "active",
-      "note": "dry-run: GEVULD ~London/vroege-NY op de tag van de resistance (future 4107-4108 = spot ~4105, bovenkant van de zone). Positie nu +22 (spot 4082,7), richting TP1 4074. Advies: SL naar BE 4105 (risicoloos), partial bij 4074, runner naar 4052/4045.",
+      "status": "closed_tp1",
+      "result": "dry-run: gevuld @ 4105 op de CPI-high resistance-tag, TP1 4074 geraakt (dag-low 4067) = +2.4R — DERDE winnaar. Gap-fill stalde op 4067 (bereikte 4052/4045 niet), bounce naar 4080; runner op BE-trail. Scorebord totaal +3.2R.",
       "direction": "short",
       "order_type": "limit",
       "entry": 4105.0,
