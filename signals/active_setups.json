@@ -14,12 +14,12 @@
       "direction": "short",
       "order_type": "limit",
       "entry": 4037.0,
-      "stop_loss": 4048.0,
+      "stop_loss": 4038.0,
       "take_profits": [4012.0, 3996.0, 3980.0],
       "conviction": "B",
-      "valid_until_utc": "2026-07-28T20:00:00Z",
-      "note": "dry-run: GEVULD @ 4037 rond 15:15 UTC — nadat de prijs de nieuwe low 4011.1 zette en terug omhoog bouncede door de 4034-4038 resistance heen. Direct ná de fill liep de bounce dóór tot 4047.4 (0.6pt onder de stop 4048) = ~-0.95R open op de high; nu 4046.7 (~-0.88R open). SL 4048 NIET geraakt, TP niet geraakt. Positie leeft, maar staat vlak onder de invalidatie — de eerstvolgende H1-close boven 4048 doodt hem (-1R). Thesis intact zolang <4048 H1-close: dit is de retest-high vóór continuation richting 4012/3996/3980; bearish HTF (Rule 14 ✅). [Voorgeschiedenis: RE-ARM na Rule 12-cancel van 12:08 UTC; oorspronkelijke retest-short 4040 vulde nooit.]",
-      "invalidation": "H1-close boven 4048 (boven de 4037.9-resistance en terug in de gebroken 4034-4056 zone) => breakdown/retest gefaald, positie dood op -1R. Hard expiry 20:00 UTC."
+      "valid_until_utc": "2026-07-28T23:59:00Z",
+      "note": "dry-run: GEVULD @ 4037 (15:15 UTC). Bounce rejected onder 4048 (high 4047.4), daarna cleane afdaling met lagere highs (4041.9 -> 4030.5 -> 4025.9). Nu 4022.9 = +1.28R open, TP1 4012 nog ~11pt weg. BE-MANAGEMENT: stop getraild van 4048 naar 4038 (1pt boven entry) om 19:08 UTC — winst beschermd, -1R-risico weg (backtest: BE-stops werken). valid_until verlengd naar 23:59 UTC zodat de GEVULDE positie niet om 20:00 auto-expired; geen overnight/weekend-carry. Bearish HTF (Rule 14 ✅). [Voorgeschiedenis: RE-ARM na Rule 12-cancel 12:08 UTC; oude 4040-order vulde nooit.]",
+      "invalidation": "Stop nu 4038 (BE-trail) => exit ~0R bij terugkeer naar entry. Thesis-invalidatie blijft H1-close boven 4048. Hard expiry 23:59 UTC (geen overnight/weekend-carry)."
     },
     {
       "id": "2026-07-28-breakdown-retest-short-4040",
