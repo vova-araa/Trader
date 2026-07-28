@@ -1,10 +1,23 @@
 {
   "version": 1,
-  "updated_utc": "2026-07-28T10:12:00Z",
+  "updated_utc": "2026-07-28T14:12:00Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
+    {
+      "id": "2026-07-28-breakdown-retest-short-4037",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4037.0,
+      "stop_loss": 4048.0,
+      "take_profits": [4012.0, 3996.0, 3980.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-28T20:00:00Z",
+      "note": "dry-run: RE-ARM van de breakdown-retest-short na de Rule 12-cancel (12:08 UTC, feed down). US-datavenster (t/m 14:00 UTC) is nu voorbij. Prijs bounce-retest naar 4037.9 (2pt onder de oude 4040-entry), werd verworpen en fade terug naar 4022 — de 4034-4038 zone is bevestigd als intraday-resistance (rejections 4034.2/4034.6/4035.6/4036.1/4037.9). Sell-limit in die resistance-cluster. Entry 4037, SL 4048 (boven de 4037.9 swing-high), RR 2.3 tot TP1 4012 (onder de day-low 4016.5 = break-of-low continuation). Rule 14 ✅ (trend-mee short, bearish HTF). Future/spot geconvergeerd (~0-1pt), levels op future gekalibreerd (Swissquote-call viel weg).",
+      "invalidation": "H1-close boven 4048 (boven de 4037.9-resistance en terug in de gebroken 4034-4056 zone) => breakdown/retest gefaald, geen short. Hard expiry 20:00 UTC."
+    },
     {
       "id": "2026-07-28-breakdown-retest-short-4040",
       "status": "expired",
