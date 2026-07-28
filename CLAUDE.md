@@ -17,19 +17,27 @@ Lees **CLAUDE_TRADE.md** volledig voordat je een chart of dataset analyseert —
 3. Sla de analyse op in `analyses/YYYY-MM-DD-<instrument>-<richting>.md`.
 4. Alleen bij een A- of B-setup de gebruiker actief notificeren; bij "geen setup" volstaat de log.
 
-## WhatsApp-notificatie — vast format (geen link, compact)
+## WhatsApp-notificatie — DIRECT versturen, simpel format (geen link)
 
-Gebruik voor de WhatsApp-alert de app "WhatsApp Notifications", action `send_message`,
-**template `calendar_reminder`** (de enige template zónder verplichte reply-link).
-Twee velden:
+**Timing: stuur de WhatsApp METEEN zodra een A/B-setup bekend is** — als éérste actie
+ná het bepalen van de setup, nog vóór het loggen/committen/pushen. Dit geldt voor élke
+A/B-setup: geplande kill zone-runs én on-demand analyses (screenshot/vraag van de
+gebruiker). Bij C of "geen setup": geen WhatsApp. Bij een fill/TP/stop-update: ook direct.
 
-- `event_name` = de volledige alert op **één doorlopende regel** (WhatsApp weigert
-  regeleinden `\n` in template-parameters). Scheid de velden met ` ▸ `. Vaste volgorde:
-  `XAUUSD <RICHTING> (<conviction>) <setup-type> ▸ Entry <x> ▸ SL <x> ▸ TP <a> / <b> / <c> ▸ RR <x> ▸ Ongeldig: <niveau> ▸ Reden: <1 zin> ▸ Status: <dry-run/live/gevuld +xR>`
-- `date_and_time` = korte context, bijv. `London-run — ma 09:00 NL`.
+Gebruik de app "WhatsApp Notifications", action `send_message`, **template
+`calendar_reminder`** (de enige zónder verplichte reply-link). Geen regeleinden (`\n`)
+in de velden — de template weigert die. Twee velden, kort en simpel:
 
-Houd het kort en scanbaar (kernvelden, geen alinea's). Bij een fill/TP-update dezelfde
-opmaak met Status = `gevuld @ x, +yR`. Géén GitHub-link meer meesturen.
+- `event_name` = de kernregel:
+  `<RICHTING> goud  •  Entry <x>  •  Stop <x>  •  Doel <TP1>  •  RR <x>`
+  (gebruik gewone woorden: "Stop" i.p.v. SL, "Doel" i.p.v. TP1; alleen het éérste doel
+  in deze regel.)
+- `date_and_time` = de details, gescheiden met ` · `:
+  `<A/B>-setup · <dry-run|LIVE|gevuld +xR> · extra doelen <TP2> / <TP3> · dood boven/onder <invalidatie>`
+
+Voorbeeld: event_name `SHORT goud • Entry 4105 • Stop 4118 • Doel 4074 • RR 2,4`,
+date_and_time `B-setup · dry-run · extra doelen 4052 / 4045 · dood boven 4118`.
+Houd het strak: regel 1 = wat te doen + de kerngetallen, regel 2 = de rest. Geen link.
 
 ## Taal
 
