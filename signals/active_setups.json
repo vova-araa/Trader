@@ -8,6 +8,9 @@
     {
       "id": "2026-07-28-breakdown-retest-short-4037",
       "status": "active",
+      "filled": true,
+      "filled_price": 4037.0,
+      "filled_utc": "2026-07-28T15:15:00Z",
       "direction": "short",
       "order_type": "limit",
       "entry": 4037.0,
@@ -15,8 +18,8 @@
       "take_profits": [4012.0, 3996.0, 3980.0],
       "conviction": "B",
       "valid_until_utc": "2026-07-28T20:00:00Z",
-      "note": "dry-run: RE-ARM van de breakdown-retest-short na de Rule 12-cancel (12:08 UTC, feed down). US-datavenster (t/m 14:00 UTC) is nu voorbij. Prijs bounce-retest naar 4037.9 (2pt onder de oude 4040-entry), werd verworpen en fade terug naar 4022 — de 4034-4038 zone is bevestigd als intraday-resistance (rejections 4034.2/4034.6/4035.6/4036.1/4037.9). Sell-limit in die resistance-cluster. Entry 4037, SL 4048 (boven de 4037.9 swing-high), RR 2.3 tot TP1 4012 (onder de day-low 4016.5 = break-of-low continuation). Rule 14 ✅ (trend-mee short, bearish HTF). Future/spot geconvergeerd (~0-1pt), levels op future gekalibreerd (Swissquote-call viel weg).",
-      "invalidation": "H1-close boven 4048 (boven de 4037.9-resistance en terug in de gebroken 4034-4056 zone) => breakdown/retest gefaald, geen short. Hard expiry 20:00 UTC."
+      "note": "dry-run: GEVULD @ 4037 rond 15:15 UTC — nadat de prijs de nieuwe low 4011.1 zette en terug omhoog bouncede door de 4034-4038 resistance heen. Direct ná de fill liep de bounce dóór tot 4047.4 (0.6pt onder de stop 4048) = ~-0.95R open op de high; nu 4046.7 (~-0.88R open). SL 4048 NIET geraakt, TP niet geraakt. Positie leeft, maar staat vlak onder de invalidatie — de eerstvolgende H1-close boven 4048 doodt hem (-1R). Thesis intact zolang <4048 H1-close: dit is de retest-high vóór continuation richting 4012/3996/3980; bearish HTF (Rule 14 ✅). [Voorgeschiedenis: RE-ARM na Rule 12-cancel van 12:08 UTC; oorspronkelijke retest-short 4040 vulde nooit.]",
+      "invalidation": "H1-close boven 4048 (boven de 4037.9-resistance en terug in de gebroken 4034-4056 zone) => breakdown/retest gefaald, positie dood op -1R. Hard expiry 20:00 UTC."
     },
     {
       "id": "2026-07-28-breakdown-retest-short-4040",
