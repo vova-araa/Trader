@@ -28,16 +28,23 @@ Gebruik de app "WhatsApp Notifications", action `send_message`, **template
 `calendar_reminder`** (de enige zónder verplichte reply-link). Geen regeleinden (`\n`)
 in de velden — de template weigert die. Twee velden, kort en simpel:
 
-- `event_name` = de kernregel:
-  `<RICHTING> goud  •  Entry <x>  •  Stop <x>  •  Doel <TP1>  •  RR <x>`
+De vaste kop van de WhatsApp-template ("New Calendar Event") ligt vast bij Meta en is
+niet via de integratie te hernoemen; laat daarom `event_name` **beginnen met een
+onderwerp-woord** zodat dát de eerste vetgedrukte regel is:
+- nieuwe setup → `NEW TRADE SETUP`
+- fill/TP/stop-update → `TRADE UPDATE`
+
+- `event_name` = onderwerp + de kernregel:
+  `NEW TRADE SETUP  •  <RICHTING> goud  •  Entry <x>  •  Stop <x>  •  Doel <TP1>  •  RR <x>`
   (gebruik gewone woorden: "Stop" i.p.v. SL, "Doel" i.p.v. TP1; alleen het éérste doel
   in deze regel.)
 - `date_and_time` = de details, gescheiden met ` · `:
   `<A/B>-setup · <dry-run|LIVE|gevuld +xR> · extra doelen <TP2> / <TP3> · dood boven/onder <invalidatie>`
 
-Voorbeeld: event_name `SHORT goud • Entry 4105 • Stop 4118 • Doel 4074 • RR 2,4`,
+Voorbeeld: event_name `NEW TRADE SETUP • SHORT goud • Entry 4105 • Stop 4118 • Doel 4074 • RR 2,4`,
 date_and_time `B-setup · dry-run · extra doelen 4052 / 4045 · dood boven 4118`.
-Houd het strak: regel 1 = wat te doen + de kerngetallen, regel 2 = de rest. Geen link.
+Bij een update: event_name `TRADE UPDATE • SHORT goud • TP1 4074 geraakt • +2,4R`.
+Houd het strak: regel 1 = onderwerp + wat te doen + de kerngetallen, regel 2 = de rest. Geen link.
 
 ## Taal
 
