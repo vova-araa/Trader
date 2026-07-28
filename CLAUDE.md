@@ -17,6 +17,20 @@ Lees **CLAUDE_TRADE.md** volledig voordat je een chart of dataset analyseert —
 3. Sla de analyse op in `analyses/YYYY-MM-DD-<instrument>-<richting>.md`.
 4. Alleen bij een A- of B-setup de gebruiker actief notificeren; bij "geen setup" volstaat de log.
 
+## WhatsApp-notificatie — vast format (geen link, compact)
+
+Gebruik voor de WhatsApp-alert de app "WhatsApp Notifications", action `send_message`,
+**template `calendar_reminder`** (de enige template zónder verplichte reply-link).
+Twee velden:
+
+- `event_name` = de volledige alert op **één doorlopende regel** (WhatsApp weigert
+  regeleinden `\n` in template-parameters). Scheid de velden met ` ▸ `. Vaste volgorde:
+  `XAUUSD <RICHTING> (<conviction>) <setup-type> ▸ Entry <x> ▸ SL <x> ▸ TP <a> / <b> / <c> ▸ RR <x> ▸ Ongeldig: <niveau> ▸ Reden: <1 zin> ▸ Status: <dry-run/live/gevuld +xR>`
+- `date_and_time` = korte context, bijv. `London-run — ma 09:00 NL`.
+
+Houd het kort en scanbaar (kernvelden, geen alinea's). Bij een fill/TP-update dezelfde
+opmaak met Status = `gevuld @ x, +yR`. Géén GitHub-link meer meesturen.
+
 ## Taal
 
 Nederlands, concreet, met prijzen en RR. Trading-termen mogen in het Engels.
