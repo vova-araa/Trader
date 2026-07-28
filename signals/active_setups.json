@@ -1,10 +1,23 @@
 {
   "version": 1,
-  "updated_utc": "2026-07-24T13:12:48Z",
+  "updated_utc": "2026-07-28T10:12:00Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
+    {
+      "id": "2026-07-28-breakdown-retest-short-4040",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4040.0,
+      "stop_loss": 4050.0,
+      "take_profits": [4012.0, 3996.0, 3980.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-28T16:00:00Z",
+      "note": "dry-run: trend-mee retest-short na breakdown van de 8-uurs consolidatie (4034-4056). Prijs brak door de 4034-floor en dumpte naar day-low 4018, bounce naar 4022. Sell-limit op de retest van gebroken support / OTE (0.58-0.62 fib van de 4056->4018 down-leg). Entry 4040, SL 4050 (boven 0.786=4048 + boven de 4042-4048 breakdown-pivot), RR 2.8 tot TP1 4012. Rule 14 ✅ (trend-mee short, bearish HTF). LET OP Rule 12: de 12:00 UTC monitor-check moet de US-datakalender (12:30-14:00 UTC venster) verifiëren en zo nodig cancellen vóór fill.",
+      "invalidation": "H1-close boven 4050 (terug boven 0.786 en in de gebroken 4034-4056 zone) => breakdown was een fakeout, geen short. Hard expiry 16:00 UTC."
+    },
     {
       "id": "2026-07-27-gap-retest-short-4105",
       "status": "closed_tp1",
