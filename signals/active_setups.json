@@ -6,6 +6,19 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
+      "id": "2026-07-29-range-short-4032",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4032.0,
+      "stop_loss": 4040.0,
+      "take_profits": [4013.0, 4001.0, 3986.0],
+      "conviction": "B",
+      "valid_until_utc": "2026-07-29T12:00:00Z",
+      "note": "dry-run: on-demand setup uit screenshots (cTrader M15/H1/D1, spot 4028.5 @ 02:01 UTC 29-07). D1 zwaar bearish maar prijs op groot 4000-4010 support; H1 bearish-consolidatie 4020-4050; M15 range 4012-4032 met prijs in de bovenkant. Trend-mee sell-limit op de rangetop-retest (4030-4032). Entry 4032, SL 4040 (boven rangetop), RR 2.4 tot TP1 4013 (net boven 4012-rangebodem). Rule 14 ✅. LET OP: 4000-support beperkt de runner (TP2 4001 net erboven); dit is een range-short, geen trend-runner. Grotere move pas bij H1-close onder 4000 + gefaalde retest -> 3960/3930. Levels op cTrader-spot gekalibreerd (broker = spot). WhatsApp NIET verstuurd: Zapier task-quota op.",
+      "invalidation": "H1-close boven 4040 (terug in de 4040-4050 zone) => range-short mislukt. Hard expiry 12:00 UTC (Rule 12, vóór US-datavenster)."
+    },
+    {
       "id": "2026-07-28-breakdown-retest-short-4037",
       "status": "expired",
       "filled": true,
