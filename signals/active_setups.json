@@ -12,6 +12,7 @@
       "filled_price": 4033.44,
       "filled_utc": "2026-07-29T02:29:00Z",
       "live_manual": "Gebruiker plaatste de trade zelf in cTrader (screenshot 04:29 NL / 02:29 UTC): SHORT 0.10 lots @ 4033.44, SL 4040, TP 4013.01/4001.06/3986.08 — matcht de setup. SL+TP als bracket op de order => cTrader beheert automatisch, los van deze monitoring. RR ~3:1 tot TP1. Demo/live nog te bevestigen door gebruiker.",
+      "update_0545utc": "H1-screenshot 07:45 NL / 05:45 UTC: prijs eerst omlaag naar ~4010-4013 (Wed-low) = TP1 4013 VRIJWEL ZEKER geraakt (op de 4000-support-zone), daarna scherpe bounce terug naar 4037.59 — vlak onder stop 4040. Restpositie nu ~-0.6R open, ~2.4pt van de stop. Advies: stop 4040 laten staan (geen H1-close erboven = thesis leeft, HTF bearish); BE-venster voorbij (prijs weer boven entry). Bounce van 4000-support was de vooraf benoemde caveat. Blotter-bevestiging (TP1-fill + restgrootte) opgevraagd bij gebruiker. WhatsApp niet mogelijk: Zapier-quota op.",
       "direction": "short",
       "order_type": "limit",
       "entry": 4032.0,
