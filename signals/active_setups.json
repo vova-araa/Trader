@@ -8,6 +8,10 @@
     {
       "id": "2026-07-29-range-short-4032",
       "status": "active",
+      "filled": true,
+      "filled_price": 4033.44,
+      "filled_utc": "2026-07-29T02:29:00Z",
+      "live_manual": "Gebruiker plaatste de trade zelf in cTrader (screenshot 04:29 NL / 02:29 UTC): SHORT 0.10 lots @ 4033.44, SL 4040, TP 4013.01/4001.06/3986.08 — matcht de setup. SL+TP als bracket op de order => cTrader beheert automatisch, los van deze monitoring. RR ~3:1 tot TP1. Demo/live nog te bevestigen door gebruiker.",
       "direction": "short",
       "order_type": "limit",
       "entry": 4032.0,
