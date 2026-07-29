@@ -7,7 +7,8 @@
   "setups": [
     {
       "id": "2026-07-29-range-short-4032",
-      "status": "active",
+      "status": "stopped",
+      "result": "LIVE (gebruiker, cTrader): SL 4040 geraakt. Prijs raakte op de weg omlaag eerst ~4010-4013 => TP1 4013 vrijwel zeker eerst gevuld, daarna bounce van het 4000-support en runner uitgestopt op 4040. Netto waarschijnlijk groen/scratch (TP1 +~3R op deel, rest -1R) — exacte netto-R afhankelijk van Blotter (TP1-fill + scale-out). 4000-support hield = de vooraf benoemde caveat kwam uit. Dry-run pipeline-order idem gestopt.",
       "filled": true,
       "filled_price": 4033.44,
       "filled_utc": "2026-07-29T02:29:00Z",
