@@ -55,12 +55,24 @@ Nederlands, concreet, met prijzen en RR. Trading-termen mogen in het Engels.
 Bij elke A/B-setup:
 
 1. `signals/active_setups.json` bijwerken (zelfde niveaus als het template;
-   C-setups NIET — die blijven advies).
+   C-setups NIET — die blijven advies). **VERPLICHTE velden per A/B-setup**
+   (mechanisch afgedwongen door `scripts/risk_guard.py`, anders `rejected`):
+   - `regime`: `"range"` of `"trend"` — je moet de markt éérst classificeren.
+   - bij `regime:"range"`: `range_low` + `range_high`. De entry moet aan een
+     RAND liggen (short in de top-band, long in de low-band) met ruimte naar de
+     overkant — geen midden-trades. Dit is de fix voor de −551-week (29-30/07).
+   - bij `regime:"trend"`: `htf_bias` (`"bearish"`/`"bullish"`); alleen trend-mee.
+   - stop entry→SL ≥ 12 punten (geen ruis-stops).
 2. `python3 scripts/trade_cycle.py` draaien. Die valideert de signalen
-   (verlopen → expired, RR < 1:2 tot TP1 → rejected), kiest zelf de modus —
-   LIVE zodra de CTRADER_*-credentials in de omgeving staan én de API-host
-   bereikbaar is, anders automatisch dry-run — en logt elke run in
+   (verlopen → expired; RR < 1:2, verkeerde regime/rand, te krappe stop →
+   rejected), checkt de **circuit breaker** (`risk_guard`: ≥2 verliezen op rij
+   of ≤ −3R deze week ⇒ RISICO-HALT, géén nieuwe orders), kiest zelf de modus
+   (LIVE met credentials + bereikbare host, anders dry-run) en logt elke run in
    `signals/execution_log.jsonl`. Commit het log en het signaalbestand mee.
+3. **Na élke gesloten trade** het resultaat vastleggen zodat de breaker klopt:
+   `python3 scripts/risk_guard.py record --r <R> --pnl <bedrag> --note "..."`.
+   Status bekijken: `risk_guard.py status`. Bewust hervatten na een halt (jouw
+   knop): `risk_guard.py resume` (geldt die week, vervalt bij een winst/reset).
 
 Credentials als env vars (NOOIT in code/repo): CTRADER_CLIENT_ID/SECRET/
 ACCESS_TOKEN/ACCOUNT_ID, CTRADER_ENV=demo|live. Voor live executie moet de

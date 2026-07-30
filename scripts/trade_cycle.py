@@ -32,6 +32,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import risk_guard  # noqa: E402  (mechanische vangrails, gedeeld met de executor)
+
 ROOT = Path(__file__).resolve().parent.parent
 SIGNALS = ROOT / "signals" / "active_setups.json"
 EXEC_LOG = ROOT / "signals" / "execution_log.jsonl"
@@ -92,6 +95,8 @@ def validate_signals():
         elif s["direction"] == "long" and not (
                 s["stop_loss"] < s["entry"] < tps[0]):
             problem = "long maar niveaus niet SL < entry < TP1"
+        if not problem:
+            problem = risk_guard.structural_reject_reason(s)  # regime/rand/min-stop
         if problem and s.get("conviction") in ("A", "B"):
             s["status"] = "rejected"
             s["rejected_reason"] = problem
@@ -155,6 +160,15 @@ def main():
         ok, summary = try_fetch()
         print(f"DATA: {'ok' if ok else 'fetch faalde (sessie levert data via MCP)'}")
         record["data_fetch"] = "ok" if ok else "failed"
+
+    # Circuit breaker (verlieslimiet) — rapporteer en blokkeer live plaatsing.
+    can, halt_reason, rstate = risk_guard.can_trade()
+    record["risk_state"] = rstate
+    if not can:
+        print(f"RISICO-HALT: {halt_reason} "
+              f"(week {rstate['week_r']:+.2f}R / {rstate['week_pnl']:+.2f}, "
+              f"{rstate['consecutive_losses']} verlies op rij). "
+              f"Geen nieuwe orders tot hervat/weekrol.")
 
     env = os.environ.get("CTRADER_ENV", "demo")
     have_creds = all(os.environ.get(k) for k in CRED_VARS)

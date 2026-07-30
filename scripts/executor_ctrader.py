@@ -32,6 +32,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import risk_guard  # noqa: E402  (mechanische vangrails, gedeeld met trade_cycle)
+
 SIGNALS = Path(__file__).resolve().parent.parent / "signals" / "active_setups.json"
 
 VOLUME_LOTS = float(os.environ.get("EXECUTOR_VOLUME_LOTS", "0.01"))  # microlot default
@@ -74,6 +77,10 @@ def load_signals():
         if s["direction"] == "long" and not s["stop_loss"] < s["entry"] < tp1:
             print(f"WEIGER {s['id']}: long-niveaus onlogisch", file=sys.stderr)
             continue
+        struct = risk_guard.structural_reject_reason(s)
+        if struct:
+            print(f"WEIGER {s['id']}: {struct}", file=sys.stderr)
+            continue
         actionable.append(s)
     return data, actionable[:MAX_OPEN_SETUPS], expired
 
@@ -81,6 +88,14 @@ def load_signals():
 def main():
     dry = "--dry-run" in sys.argv
     data, setups, expired = load_signals()
+
+    # Circuit breaker: te veel verlies => geen NIEUWE orders (wel nog cancellen).
+    ok, halt_reason, st = risk_guard.can_trade()
+    if not ok:
+        print(f"RISICO-HALT: geen nieuwe orders — {halt_reason} "
+              f"(week {st['week_r']:+.2f}R / {st['week_pnl']:+.2f}). "
+              f"Hervat bewust met: python3 scripts/risk_guard.py resume")
+        setups = []  # niets plaatsen; expired/kill-cancels lopen wel door
 
     if data.get("kill_switch"):
         print("KILL SWITCH ACTIEF: alle executor-orders annuleren, niets plaatsen.")
