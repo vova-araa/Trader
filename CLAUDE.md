@@ -17,6 +17,12 @@ Lees **CLAUDE_TRADE.md** volledig voordat je een chart of dataset analyseert —
 3. Sla de analyse op in `analyses/YYYY-MM-DD-<instrument>-<richting>.md`.
 4. Alleen bij een A- of B-setup de gebruiker actief notificeren; bij "geen setup" volstaat de log.
 
+**Backtesten / regels verifiëren** (de "run backtests"-stap): `scripts/backtest_rules.py`
+speelt de mechanische `risk_guard`-regels terug over historische candles; de identieke
+regels staan ook als TradingView-strategie in `strategies/xauusd_range_ote.pine` (gratis
+backtesten op echte data in de browser). Zie `docs/TRADINGVIEW_MCP.md` voor de context
+rond de "TradingView MCP" (Yahoo-data, werkt niet in de web-sandbox — draai lokaal).
+
 ## WhatsApp-notificatie — DIRECT versturen, simpel format (geen link)
 
 **Timing: stuur de WhatsApp METEEN zodra een A/B-setup bekend is** — als éérste actie

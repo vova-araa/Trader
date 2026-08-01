@@ -1,0 +1,89 @@
+//@version=5
+// XAUUSD Range-OTE — de mechanische regels uit risk_guard.py als TradingView-strategie.
+// Doel: onze aangescherpte regels backtesten op ECHTE TradingView-data (gratis, geen
+// Zapier, geen sandbox-limiet). Plak dit in TradingView -> Pine Editor -> Add to chart,
+// zet de chart op XAUUSD (of GC1! future) en open de "Strategy Tester".
+//
+// Regels die 1-op-1 met scripts/risk_guard.py meelopen:
+//   - REGIME=range: alleen aan een RAND traden, nooit in het midden (Rule 16/17)
+//       short alleen in de top-band (>= range_high - edgeBuffer)
+//       long  alleen in de low-band  (<= range_low  + edgeBuffer)
+//       + minRoom ruimte naar de overkant
+//   - stop >= minStop punten, geen ruis-stops (Rule 18)
+//   - reward:risk tot TP1 >= rr (harde 1:2, Rule 2)
+//   - circuit breaker: na maxConsLoss verliezen op rij deze week -> geen nieuwe entries
+//       (reset op de weekrol) — de −551-week-fix (Rule 21)
+//   - trend-modus optioneel: alleen trend-mee (Rule 14)
+
+strategy("XAUUSD Range-OTE (Claude rules)", overlay=true, initial_capital=10000,
+     default_qty_type=strategy.percent_of_equity, default_qty_value=1,
+     commission_type=strategy.commission.cash_per_order, commission_value=0,
+     calc_on_order_fills=false, process_orders_on_close=true)
+
+// ---------- Inputs (spiegelen risk_guard.py-constanten) ----------
+rangeLen    = input.int(96,   "Range-lookback (bars)",             minval=20, group="Regime")
+edgeBuffer  = input.float(30, "Rand-band breedte (punten)",        minval=1,  group="Regime")
+minRoom     = input.float(30, "Min. ruimte naar overkant (punten)",minval=1,  group="Regime")
+minStop     = input.float(12, "Min. stopafstand (punten)",         minval=1,  group="Risk")
+rr          = input.float(2.0,"Min. reward:risk tot TP1",          minval=1,  group="Risk")
+maxConsLoss = input.int(2,    "Halt na N verliezen op rij",        minval=1,  group="Circuit breaker")
+useTrend    = input.bool(false, "Trend-modus i.p.v. range",                    group="Modus")
+htfBull     = input.bool(true,  "HTF-bias bullish (trend-modus)",              group="Modus")
+
+// ---------- Range detectie ----------
+rangeHigh  = ta.highest(high, rangeLen)
+rangeLow   = ta.lowest(low,  rangeLen)
+rangeWidth = rangeHigh - rangeLow
+validRange = rangeWidth >= 2 * edgeBuffer
+
+// ---------- Rand-bands + ruimte naar de overkant ----------
+inTopBand = close >= rangeHigh - edgeBuffer
+inLowBand = close <= rangeLow  + edgeBuffer
+roomShort = close - rangeLow          // ruimte omlaag voor een short
+roomLong  = rangeHigh - close         // ruimte omhoog voor een long
+
+// ---------- Circuit breaker: verliezen op rij, reset op de weekrol ----------
+var int consLoss = 0
+if weekofyear != weekofyear[1]
+    consLoss := 0
+if strategy.closedtrades > strategy.closedtrades[1]
+    lastProfit = strategy.closedtrades.profit(strategy.closedtrades - 1)
+    consLoss := lastProfit < 0 ? consLoss + 1 : 0
+halted = consLoss >= maxConsLoss
+
+// ---------- Entry-signalen ----------
+canShort = validRange and inTopBand and roomShort >= minRoom
+canLong  = validRange and inLowBand and roomLong  >= minRoom
+if useTrend
+    // trend-mee: short alleen in bearish bias, long alleen in bullish bias (Rule 14)
+    canShort := (not htfBull) and inTopBand
+    canLong  := htfBull and inLowBand
+
+// ---------- Niveaus (stop buiten de rand, RR-doel) ----------
+shortStop = math.max(rangeHigh + 2, close + minStop)
+shortRisk = shortStop - close
+shortTP   = close - rr * shortRisk
+
+longStop  = math.min(rangeLow - 2, close - minStop)
+longRisk  = close - longStop
+longTP    = close + rr * longRisk
+
+// harde min-stop check (Rule 18)
+shortOK = canShort and not halted and shortRisk >= minStop
+longOK  = canLong  and not halted and longRisk  >= minStop
+
+// ---------- Orders (één positie tegelijk) ----------
+if shortOK and strategy.position_size == 0
+    strategy.entry("Short", strategy.short)
+    strategy.exit("Short-x", "Short", stop=shortStop, limit=shortTP)
+
+if longOK and strategy.position_size == 0
+    strategy.entry("Long", strategy.long)
+    strategy.exit("Long-x", "Long", stop=longStop, limit=longTP)
+
+// ---------- Visualisatie ----------
+plot(rangeHigh, "Range high", color=color.new(color.red, 0),   linewidth=1)
+plot(rangeLow,  "Range low",  color=color.new(color.green, 0), linewidth=1)
+plot(rangeHigh - edgeBuffer, "Top band",  color=color.new(color.red, 60),   style=plot.style_stepline)
+plot(rangeLow  + edgeBuffer, "Low band",  color=color.new(color.green, 60), style=plot.style_stepline)
+bgcolor(halted ? color.new(color.red, 88) : na, title="RISICO-HALT")
