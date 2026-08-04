@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "updated_utc": "2026-07-29T00:08:50Z",
+  "updated_utc": "2026-08-04T20:12:38Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
       "id": "2026-08-02-range-top-short-4108",
-      "status": "active",
+      "status": "expired",
       "direction": "short",
       "order_type": "limit",
       "entry": 4108.0,
