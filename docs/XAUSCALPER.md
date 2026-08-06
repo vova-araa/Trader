@@ -1,0 +1,72 @@
+# XauScalper — XAUUSD-scalper cBot (cTrader Automate)
+
+Een strakke intraday momentum-scalper voor goud, met trend-filter, ATR-stops, spread-guard,
+sessie-filter, break-even/trailing én een **in-bot circuit breaker**. Bestand:
+`strategies/XauScalper.cs`.
+
+## Eerst: de "90% win"-valkuil (waarom die target verkeerd is)
+
+Win rate alleen zegt **niets** over winst. Je haalt makkelijk 90% wins met een brede stop +
+mini-TP — maar één loser (die 10%) wist dan tientallen winnaars uit. Wat telt:
+
+- **Expectancy** = (winrate × gem. winst) − (verliesrate × gem. verlies). Dit moet **positief**.
+- **Profit factor** = brutowinst / brutoverlies. **1,2–1,5** is werkbaar voor scalping.
+- **Max drawdown** — hoe diep zakt de equity? Bepaalt of je 't overleeft.
+
+Normale win rates: **55–70%** voor scalping/mean-reversion, 30–45% voor trend-volgen — beide
+kunnen top zijn. Bij goud vreet de **spread** je edge, dus scalp niet blind. Optimaliseer
+daarom op **Net Profit / Profit Factor / Drawdown**, nooit op win rate alleen.
+
+Bronnen: <https://tradingstats.net/win-rate-profit-factor-expectancy/> ·
+<https://www.tradezella.com/blog/win-rate> ·
+<https://help.ctrader.com/ctrader-algo/documentation/cbots/cbot-code-samples/>
+
+## Wat de bot doet
+
+1. **HTF-trendfilter** (H1 EMA 21/55): alleen long in bullish, short in bearish HTF — geen
+   counter-trend (zelfde geest als Rule 14 / risk_guard).
+2. **Entry**: pullback naar de entry-EMA op de chart-TF die weer in de trendrichting sluit,
+   met RSI-momentumbevestiging. Geen midden-trades.
+3. **ATR-stops**: SL = ATR×1,5 (instelbaar), TP = SL×RR (default RR 1,4). Volatiliteit
+   bepaalt de stop.
+4. **Spread-guard**: skip als de goud-spread > MaxSpreadPips (default 30) — anti-scalp-killer.
+5. **Sessie-filter**: alleen 07–20 UTC (Londen+NY), instelbaar.
+6. **Break-even + ATR-trailing**: stop naar BE zodra +1×ATR, daarna trailen op 1,5×ATR.
+7. **Circuit breaker (de kern)**: stopt de héle dag na **3 verliezen op rij** of een
+   **dagverlies ≥ 3%**, en max **20 trades/dag**. Mechanisch — net als `scripts/risk_guard.py`.
+8. **Risk-sizing**: elke trade riskeert een vast **% van je balans** (default 0,5%), lotgrootte
+   volgt automatisch uit de ATR-stopafstand. Geen martingale, geen averaging-down, altijd een SL.
+
+## Installeren & draaien
+
+1. cTrader → **Automate** → **New cBot** → plak `strategies/XauScalper.cs` → **Build**.
+2. Open een **XAUUSD**-chart (M1 of M5 aanrader), sleep de cBot erop.
+3. Zet parameters (of laat default), kies **instance** → **Backtest**-tab.
+
+## Backtesten & optimaliseren — de juiste manier
+
+1. **Data**: kies **Tick data** (of m1) voor XAUUSD, minimaal 6–12 maanden, inclusief nieuws-
+   periodes. Zet realistische **commissie + spread** aan (belangrijk bij goud!).
+2. **Optimaliseer** op **Net Profit** of **Profit Factor** met **Max Drawdown** als grens —
+   niet op win rate. Vary: `SL = ATR x`, `Reward:Risk`, `Entry EMA`, `RSI`-drempels, sessie.
+3. **Walk-forward**: optimaliseer op periode A, test out-of-sample op periode B. Als 't daar
+   instort → overfit, niet gebruiken.
+4. **Reality-check**: profit factor > 1,3 én drawdown die je aankunt, over meerdere jaren en
+   markttypes. Anders bijstellen of niet live.
+
+## Naar live — voorzichtig, gefaseerd
+
+1. **Demo eerst** (weken), vergelijk of live fills/spreads matchen met de backtest.
+2. Dan **klein live**: `Risk % per trade` op 0,25–0,5%, laat de **breaker** aanstaan.
+3. Schaal pas op ná bewezen positieve expectancy op je échte account.
+
+## Eerlijke verwachting
+
+Geen enkele retail-bot is "gegarandeerd 90% win" — wie dat verkoopt, liegt of blaast op.
+Deze bot is gebouwd om een **positieve verwachting met beheerst risico** te hebben en te
+**stoppen als het misgaat**. De rest is jouw werk: backtesten, valideren, klein beginnen.
+Echte HFT (microseconden, colocatie) kan een particulier sowieso niet — dit is een snelle
+intraday-scalper, wat wél haalbaar is.
+
+> Let op: `.cs`-cBots draaien in cTrader zelf (C#), niet in deze repo-omgeving. De repo bewaart
+> de broncode + deze uitleg; compileren en backtesten doe je in cTrader Automate.
