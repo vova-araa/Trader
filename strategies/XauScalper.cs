@@ -77,6 +77,8 @@ namespace cAlgo.Robots
         public double DailyLossLimitPct { get; set; }
         [Parameter("Max trades/day", Group = "Breaker", DefaultValue = 20, MinValue = 1)]
         public int MaxTradesPerDay { get; set; }
+        [Parameter("Max TOTAL DD % (0=off, prop!)", Group = "Breaker", DefaultValue = 0, MinValue = 0)]
+        public double MaxTotalDdPct { get; set; }
 
         private const string Label = "XauScalper";
         private Bars _htf;
@@ -86,8 +88,8 @@ namespace cAlgo.Robots
 
         private DateTime _day;
         private int _consecLosses, _tradesToday;
-        private double _dayStartBalance;
-        private bool _halted;
+        private double _dayStartBalance, _initialBalance;
+        private bool _halted, _deadForRun;
 
         protected override void OnStart()
         {
@@ -99,15 +101,17 @@ namespace cAlgo.Robots
             _atr = Indicators.AverageTrueRange(AtrPeriod, MovingAverageType.Exponential);
 
             Positions.Closed += OnClosed;
+            _initialBalance = Account.Balance;
             ResetDay();
-            Print("XauScalper gestart. Risk {0}% | SL {1}xATR | RR {2} | breaker {3} losses / {4}% dag",
-                  RiskPercent, SlAtrMult, RewardRatio, MaxConsecLosses, DailyLossLimitPct);
+            Print("XauScalper gestart. Risk {0}% | SL {1}xATR | RR {2} | breaker {3} losses / {4}% dag / totaal-DD {5}%",
+                  RiskPercent, SlAtrMult, RewardRatio, MaxConsecLosses, DailyLossLimitPct, MaxTotalDdPct);
         }
 
         // Signalen op bar-close; management (BE/trailing) op elke tick.
         protected override void OnBar()
         {
             RollDayIfNeeded();
+            if (_deadForRun) return;   // totaal-DD-halt (prop): geldt over alle dagen
             if (_halted) return;
             if (!InSession()) return;
             if (SpreadPips() > MaxSpreadPips) return;
@@ -226,6 +230,12 @@ namespace cAlgo.Robots
             {
                 _halted = true;
                 Print("RISICO-HALT: dagverlies {0:0.00} <= limiet {1:0.00} — stop voor vandaag.", dayPnl, lossLimit);
+            }
+            if (MaxTotalDdPct > 0 && Account.Balance <= _initialBalance * (1 - MaxTotalDdPct / 100.0))
+            {
+                _deadForRun = true; _halted = true;
+                Print("TOTAAL-DD-HALT: balans {0:0.00} <= start {1:0.00} -{2}% — bot stopt (prop-bescherming).",
+                      Account.Balance, _initialBalance, MaxTotalDdPct);
             }
         }
 

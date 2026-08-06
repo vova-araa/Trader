@@ -99,5 +99,36 @@ hebben een **lagere win rate maar grotere winnaars** — mik op RR ≥ 2 en expe
 
 ---
 
+## Broker-presets (The5ers & FP Markets)
+
+### The5ers (funded — cTrader of MT5)
+- **ALLEEN `XauScalper` en `XauBreakout`.** `XauFlow` NIET — The5ers verbiedt **HFT/tick-scalping**;
+  die bot kan je account breachen/bannen.
+- Zet de **breaker onder** hún limiet (met marge), en zet de **totaal-DD-halt** aan:
+
+  | Programma | firma dag-DD | firma totaal-DD | `Daily loss limit %` | `Max TOTAL DD %` | `Risk %` |
+  |---|---|---|---|---|---|
+  | Hyper Growth | 3% | 6% static | **2.0** | **4.5** | 0.25–0.5 |
+  | High Stakes | 4% | 6% max | **2.5** | **4.5** | 0.25–0.5 |
+  | Bootcamp (trailing DD) | — | trailing | **2.0** | **3.5** | **0.25** |
+
+  De bot-halts staan bewust **strakker** dan de firma-limiet zodat je nooit tegen hún grens
+  aanloopt. `Max consec losses/day` = 2–3. **Let op:** de totaal-DD-halt rekent vanaf de
+  startbalans van de run (static). Bootcamp gebruikt *trailing* DD — houd 'm daar extra klein
+  en monitor zelf mee; de bot kent jouw high-water-trailing niet.
+
+### FP Markets demo (cTrader, raw ECN)
+- **Alle drie** mogen hier — dit is je **testomgeving**, inclusief `XauFlow` (raw ECN heeft een
+  order-book/DOM en lage spread → order-flow werkt hier het best).
+- `Max TOTAL DD %` = **0** (uit) op de demo; `Daily loss limit %` 3, `Risk %` 0.5 om vrij te testen.
+- Check de **live spread** op XAUUSD (raw-account, in pips = `(Ask-Bid)/PipSize`) en zet
+  `Max spread` ~2× de gemiddelde rustige spread. Bij nieuws spuit gold-spread omhoog — de guard
+  slaat die trades dan over.
+
+**Werkvolgorde:** eerst álles op de **FP Markets demo** backtesten + forward-testen (weken),
+pas wat bewezen werkt op **The5ers** zetten (zonder XauFlow), met de presets hierboven.
+
+---
+
 > Let op: `.cs`-cBots draaien in cTrader zelf (C#), niet in deze repo-omgeving. De repo bewaart
 > de broncode + deze uitleg; compileren en backtesten doe je in cTrader Automate.
