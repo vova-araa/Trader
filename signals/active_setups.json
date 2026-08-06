@@ -6,8 +6,26 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-08-05-breakout-retest-long-4188",
+      "id": "2026-08-06-uptrend-pullback-long-4235",
       "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4235.0,
+      "stop_loss": 4210.0,
+      "take_profits": [
+        4290.0,
+        4320.0,
+        4360.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bullish",
+      "valid_until_utc": "2026-08-07T20:00:00Z",
+      "invalidation": "H1-close onder 4205 = higher-low-structuur breekt, uptrend in twijfel. Trend-mee: koop de pullback naar de 4230-4235 shelf (50% van de 4180->4303-leg + prior support), doelen 4290 (onder de 4303-high), 4320, 4360."
+    },
+    {
+      "id": "2026-08-05-breakout-retest-long-4188",
+      "status": "superseded",
       "direction": "long",
       "order_type": "limit",
       "entry": 4188.0,
@@ -21,7 +39,8 @@
       "regime": "trend",
       "htf_bias": "bullish",
       "valid_until_utc": "2026-08-07T20:00:00Z",
-      "invalidation": "H1-close onder 4160 = breakout faalt, terug in de oude 4000-4115 range. Trend-mee: koop de retest van de 4170-4180 breakout-shelf (nu support), mee met de bullish breakout vanaf de 4000-base. Doel 4250 (recente high), 4300, 4436 (daily supply-shelf)."
+      "invalidation": "H1-close onder 4160 = breakout faalt, terug in de oude 4000-4115 range. Trend-mee: koop de retest van de 4170-4180 breakout-shelf (nu support), mee met de bullish breakout vanaf de 4000-base. Doel 4250 (recente high), 4300, 4436 (daily supply-shelf).",
+      "result": "Prijs draaide op ~4180 (5 aug) en rende naar 4303; 4188-retest achterhaald. Vervangen door 4235-pullback-long."
     },
     {
       "id": "2026-08-02-range-top-short-4108",
