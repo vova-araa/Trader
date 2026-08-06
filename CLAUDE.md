@@ -23,10 +23,11 @@ regels staan ook als TradingView-strategie in `strategies/xauusd_range_ote.pine`
 backtesten op echte data in de browser). Zie `docs/TRADINGVIEW_MCP.md` voor de context
 rond de "TradingView MCP" (Yahoo-data, werkt niet in de web-sandbox — draai lokaal).
 
-**Geautomatiseerde XAUUSD-scalper (cTrader cBot)**: `strategies/XauScalper.cs` — een intraday
-momentum-scalper met trend-filter, ATR-stops, spread/sessie-filters, break-even/trailing en een
-in-bot circuit breaker (zelfde idee als `risk_guard`). Compileren + backtesten in cTrader
-Automate; optimaliseer op profit factor/drawdown, NIET op win rate. Uitleg: `docs/XAUSCALPER.md`.
+**Geautomatiseerde XAUUSD-cBots (cTrader)**: drie bots in `strategies/`, elk met dezelfde
+risk-scaffolding + in-bot circuit breaker (idee van `risk_guard`): `XauScalper.cs` (trend-pullback
+momentum), `XauFlow.cs` (tick-order-flow/volume-structuur, "HFT-achtig"), `XauBreakout.cs`
+(Donchian-breakout + volume). Compileren + backtesten in cTrader Automate; optimaliseer op
+profit factor/drawdown, NIET op win rate. Uitleg: `docs/XAUSCALPER.md`.
 
 ## WhatsApp-notificatie — DIRECT versturen, simpel format (geen link)
 

@@ -1,8 +1,20 @@
-# XauScalper — XAUUSD-scalper cBot (cTrader Automate)
+# XAUUSD cBot-suite (cTrader Automate)
 
-Een strakke intraday momentum-scalper voor goud, met trend-filter, ATR-stops, spread-guard,
-sessie-filter, break-even/trailing én een **in-bot circuit breaker**. Bestand:
-`strategies/XauScalper.cs`.
+Drie cBots voor goud, allemaal met dezelfde risk-scaffolding (%-risk sizing, ATR-stops,
+spread-guard, sessie-filter, break-even/trailing) én een **in-bot circuit breaker**
+(consec-loss + dagverlies + max trades, idee van `scripts/risk_guard.py`). Geen martingale,
+altijd een harde stop.
+
+| Bot | Bestand | Stijl | TF | Aard |
+|---|---|---|---|---|
+| **XauScalper** | `strategies/XauScalper.cs` | trend-pullback momentum | M1/M5 | hogere win rate, RR ~1,4 |
+| **XauFlow** | `strategies/XauFlow.cs` | tick-order-flow / volume-structuur | tick/M1 | "HFT-achtig", snel in/uit, RR ~1,2 |
+| **XauBreakout** | `strategies/XauBreakout.cs` | Donchian/range-breakout + volume | M5/M15 | lagere win rate, RR ~2, grote winnaars |
+
+Kies er één per chart/instance (niet stapelen op hetzelfde symbool). Hieronder de details van
+XauScalper; XauFlow en XauBreakout hebben dezelfde risk-logica, andere entry.
+
+## XauScalper — trend-pullback momentum
 
 ## Eerst: de "90% win"-valkuil (waarom die target verkeerd is)
 
@@ -67,6 +79,25 @@ Deze bot is gebouwd om een **positieve verwachting met beheerst risico** te hebb
 **stoppen als het misgaat**. De rest is jouw werk: backtesten, valideren, klein beginnen.
 Echte HFT (microseconden, colocatie) kan een particulier sowieso niet — dit is een snelle
 intraday-scalper, wat wél haalbaar is.
+
+## XauFlow — tick-order-flow / volume-structuur ("HFT-achtig")
+
+Reageert op **elke tick** en leest **volume-structuur**: order-book-imbalance (DOM, mits je
+broker die levert — anders automatische fallback op tick-volume + micro-momentum), een
+**volume-burst**-filter en snel micro-momentum, trend-mee met een snelle EMA. Minieme ATR-stop
+(0,8×ATR), RR ~1,2, cooldown tegen overtrading. **Eerlijk:** dit is géén echte HFT (dat kan
+retail niet — microseconden/colocatie/L2 zijn bank-terrein); het is de snelste haalbare
+order-flow-scalper. Backtest **met tick-data** en realistische spread, anders is het resultaat
+fictie. Werkt het best op een lage-spread ECN-goud-feed.
+
+## XauBreakout — Donchian/range-breakout + volume
+
+Koopt de **uitbraak** van een N-bar-kanaal (hoogste high / laagste low) mits bevestigd door een
+**volume-burst** en (optioneel) mee met de HTF-trend. Default plaatst hij **stop-orders** net
+boven/onder het kanaal zodat je op de break zelf in zit (intrabar), met order-expiry. Breakouts
+hebben een **lagere win rate maar grotere winnaars** — mik op RR ≥ 2 en expectancy, niet op win%.
+
+---
 
 > Let op: `.cs`-cBots draaien in cTrader zelf (C#), niet in deze repo-omgeving. De repo bewaart
 > de broncode + deze uitleg; compileren en backtesten doe je in cTrader Automate.
