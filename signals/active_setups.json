@@ -6,8 +6,26 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-08-06-pullback-retest-long-4226",
+      "id": "2026-08-07-uptrend-dipbuy-long-4248",
       "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4248.0,
+      "stop_loss": 4225.0,
+      "take_profits": [
+        4295.0,
+        4320.0,
+        4360.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bullish",
+      "valid_until_utc": "2026-08-08T20:00:00Z",
+      "invalidation": "H1-close onder 4222 = pullback-structuur breekt. Trend-mee: buy de dip naar de 4248-higher-low (0.07-entry-zone), NIET bijkopen op 4293 (weerstand/extended). Doelen 4295, 4320, 4360."
+    },
+    {
+      "id": "2026-08-06-pullback-retest-long-4226",
+      "status": "played_out",
       "direction": "long",
       "order_type": "limit",
       "entry": 4226.0,
@@ -21,7 +39,8 @@
       "regime": "trend",
       "htf_bias": "bullish",
       "valid_until_utc": "2026-08-08T20:00:00Z",
-      "invalidation": "H1-close onder 4205 = pullback-thesis dood. Trend-mee: BUY LIMIT op de retest van de 4222-pivot (bounce hield boven de 4210-stop). Doelen 4275 (lower-high), 4303 (high), 4340."
+      "invalidation": "H1-close onder 4205 = pullback-thesis dood. Trend-mee: BUY LIMIT op de retest van de 4222-pivot (bounce hield boven de 4210-stop). Doelen 4275 (lower-high), 4303 (high), 4340.",
+      "result": "Buy-zone 4226 gevuld op de 4222-dip (user: 0.10 @ 4225.88); prijs +67 naar 4293. Uptrend hervat."
     },
     {
       "id": "2026-08-06-uptrend-pullback-long-4235",
