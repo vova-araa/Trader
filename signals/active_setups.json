@@ -6,8 +6,26 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-08-07-uptrend-dipbuy-long-4248",
+      "id": "2026-08-09-breakout-retest-long-4305",
       "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4305.0,
+      "stop_loss": 4286.0,
+      "take_profits": [
+        4360.0,
+        4400.0,
+        4430.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bullish",
+      "valid_until_utc": "2026-08-11T20:00:00Z",
+      "invalidation": "H1-close onder 4285 = breakout faalt, terug in de 4240-4300 zone. Trend-mee: buy de retest van de 4300-4305 breakout-shelf (oude 4303-weerstand -> nu support) na de run naar 4367-high. NIET market-buy op 4341 (extended, vlak onder de high, slechte R:R). Doelen 4360 (onder de high), 4400 (rond getal / measured move), 4430."
+    },
+    {
+      "id": "2026-08-07-uptrend-dipbuy-long-4248",
+      "status": "superseded",
       "direction": "long",
       "order_type": "limit",
       "entry": 4248.0,
@@ -21,7 +39,8 @@
       "regime": "trend",
       "htf_bias": "bullish",
       "valid_until_utc": "2026-08-08T20:00:00Z",
-      "invalidation": "H1-close onder 4222 = pullback-structuur breekt. Trend-mee: buy de dip naar de 4248-higher-low (0.07-entry-zone), NIET bijkopen op 4293 (weerstand/extended). Doelen 4295, 4320, 4360."
+      "invalidation": "H1-close onder 4222 = pullback-structuur breekt. Trend-mee: buy de dip naar de 4248-higher-low (0.07-entry-zone), NIET bijkopen op 4293 (weerstand/extended). Doelen 4295, 4320, 4360.",
+      "result": "Nooit gevuld — de dip naar 4248 kwam niet. Prijs brak juist 4303 OMHOOG (het buy-stop-breakout-scenario) en rende naar 4367; consolideert nu ~4341. Vervangen door de 4305-breakout-retest-long."
     },
     {
       "id": "2026-08-06-pullback-retest-long-4226",
