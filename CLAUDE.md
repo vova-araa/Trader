@@ -31,7 +31,17 @@ totaal-DD-halt (idee van `risk_guard`). Compileren + backtesten in cTrader Autom
 op profit factor/drawdown, NIET op win rate. Proces (walk-forward etc.): `docs/XAUEDGE.md`;
 bot-details: `docs/XAUSCALPER.md`.
 
-## WhatsApp-notificatie — DIRECT versturen, simpel format (geen link)
+## WhatsApp-notificatie — UITGESCHAKELD (per gebruiker, 2026-08-09)
+
+**Stuur GEEN WhatsApp meer.** De gebruiker wil de setups rechtstreeks in de chat, niet via
+WhatsApp. Bij élke A/B-setup (én bij fill/TP/stop-updates): rapporteer de setup **in de chat**
+— entry, stop, doelen, RR, conviction, modus — en sla de WhatsApp-stap over. De rest van de
+pipeline (active_setups.json bijwerken, trade_cycle draaien, analyse loggen, committen/pushen)
+blijft ongewijzigd. Onderstaande WhatsApp-instructies zijn historisch/inactief.
+
+<details><summary>Historisch (inactief): oud WhatsApp-format</summary>
+
+### WhatsApp-notificatie — DIRECT versturen, simpel format (geen link)
 
 **Timing: stuur de WhatsApp METEEN zodra een A/B-setup bekend is** — als éérste actie
 ná het bepalen van de setup, nog vóór het loggen/committen/pushen. Dit geldt voor élke
@@ -59,6 +69,8 @@ Voorbeeld: event_name `NEW TRADE SETUP • SHORT goud • Entry 4105 • Stop 41
 date_and_time `B-setup · dry-run · extra doelen 4052 / 4045 · dood boven 4118`.
 Bij een update: event_name `TRADE UPDATE • SHORT goud • TP1 4074 geraakt • +2,4R`.
 Houd het strak: regel 1 = onderwerp + wat te doen + de kerngetallen, regel 2 = de rest. Geen link.
+
+</details>
 
 ## Taal
 
