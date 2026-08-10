@@ -24,11 +24,13 @@ backtesten op echte data in de browser). Zie `docs/TRADINGVIEW_MCP.md` voor de c
 rond de "TradingView MCP" (Yahoo-data, werkt niet in de web-sandbox — draai lokaal).
 
 **Geautomatiseerde XAUUSD-cBots (cTrader)**: flagship = `strategies/XauEdge.cs` (bewust simpel:
-H1-trend + momentum-breakout, 5 edge-knoppen; gebruik deze). Varianten/experimenten:
-`XauScalper.cs` (trend-pullback), `XauFlow.cs` (tick-order-flow, "HFT-achtig", NIET op The5ers),
-`XauBreakout.cs` (Donchian-breakout). Allemaal met risk-scaffolding + in-bot circuit breaker +
-totaal-DD-halt (idee van `risk_guard`). Compileren + backtesten in cTrader Automate; optimaliseer
-op profit factor/drawdown, NIET op win rate. Proces (walk-forward etc.): `docs/XAUEDGE.md`;
+H1-trend + momentum-breakout, 5 edge-knoppen; gebruik deze op **The5ers**, bar-based). Smart-money-
+bot = `strategies/XauSmart.cs` (**liquidity sweep + order-flow/DOM-bevestiging**, alleen op **FP
+Markets raw ECN** — order-book vereist; NIET op The5ers ivm HFT-verbod; doc: `docs/XAUSMART.md`).
+Varianten/experimenten: `XauScalper.cs` (trend-pullback), `XauFlow.cs` (tick-order-flow, "HFT-achtig",
+NIET op The5ers), `XauBreakout.cs` (Donchian-breakout). Allemaal met risk-scaffolding + in-bot
+circuit breaker + totaal-DD-halt (idee van `risk_guard`). Compileren + backtesten in cTrader Automate;
+optimaliseer op profit factor/drawdown, NIET op win rate. Proces (walk-forward etc.): `docs/XAUEDGE.md`;
 bot-details: `docs/XAUSCALPER.md`.
 
 ## WhatsApp-notificatie — UITGESCHAKELD (per gebruiker, 2026-08-09)
