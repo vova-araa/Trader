@@ -22,7 +22,7 @@
       "htf_bias": "bullish",
       "valid_until_utc": "2026-08-11T20:00:00Z",
       "live_manual": true,
-      "invalidation": "H1-close onder 4285 = breakout faalt, terug in de 4240-4300 zone. GEBRUIKER heeft LIVE 2x 0.07 buy-limits BEIDE naar ~4304-4305 verplaatst (de 4319.70-leg omlaag geschoven), gedeelde SL 4285.73 => 0.14 geconcentreerd op de breakout-support, NIETS gevuld (prijs ~4322, pullback van 4367). Trend-mee dip-buy. Beide legs nu RR ~2.9 t/m 4360. Vult alleen als de dip 4304 raakt; anders gemist (bewuste keuze: betere entry vs lagere fill-kans). Doelen 4360, 4400, 4430."
+      "invalidation": "H1-close onder 4285 = breakout faalt. UPDATE 10-08: dip bodemde ~4305-4308 en bounced naar 4341 => 4304-4305-support HIELD, maar de buy-limit 4304.97 werd NET NIET getikt (gebruiker bevestigt: niet gevuld). Gebruiker is FLAT; limit rust nog. Overweeg entry naar ~4308 (waar kopers zich toonden) om niet weer op 2-3 pt te missen; SL blijft 4285 => RR t/m 4360 nog ~2.3. Range nu 4305-4376 (4376 = research-weerstand). NIET chasen op 4341 (midden). Trend-mee dip-buy. Doelen 4360, 4400, 4430."
     },
     {
       "id": "2026-08-07-uptrend-dipbuy-long-4248",
