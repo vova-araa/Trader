@@ -21,7 +21,8 @@
       "regime": "trend",
       "htf_bias": "bullish",
       "valid_until_utc": "2026-08-11T20:00:00Z",
-      "invalidation": "H1-close onder 4285 = breakout faalt, terug in de 4240-4300 zone. Trend-mee: buy de retest van de 4300-4305 breakout-shelf (oude 4303-weerstand -> nu support) na de run naar 4367-high. NIET market-buy op 4341 (extended, vlak onder de high, slechte R:R). Doelen 4360 (onder de high), 4400 (rond getal / measured move), 4430."
+      "live_manual": true,
+      "invalidation": "H1-close onder 4285 = breakout faalt, terug in de 4240-4300 zone. GEBRUIKER heeft dit LIVE gelayerd met twee 0.07-legs, gedeelde SL 4285.73: leg-1 buy-limit 4319.70 (GEVULD ~10-08 rond 4321-pullback), leg-2 buy-limit 4304.97 (nog PENDING op de breakout-support). Trend-mee dip-buy na de run naar 4367-high. NIET market-buy (extended). Doelen 4360, 4400, 4430."
     },
     {
       "id": "2026-08-07-uptrend-dipbuy-long-4248",
