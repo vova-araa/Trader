@@ -10,19 +10,18 @@
       "status": "active",
       "direction": "long",
       "order_type": "limit",
-      "entry": 4305.0,
-      "stop_loss": 4286.0,
+      "entry": 4307.88,
+      "stop_loss": 4288.64,
       "take_profits": [
-        4360.0,
-        4400.0,
-        4430.0
+        4400.05,
+        4500.18
       ],
       "conviction": "B",
       "regime": "trend",
       "htf_bias": "bullish",
       "valid_until_utc": "2026-08-11T20:00:00Z",
       "live_manual": true,
-      "invalidation": "H1-close onder 4285 = breakout faalt. UPDATE 10-08: dip bodemde ~4305-4308 en bounced naar 4341 => 4304-4305-support HIELD, maar de buy-limit 4304.97 werd NET NIET getikt (gebruiker bevestigt: niet gevuld). Gebruiker is FLAT; limit rust nog. Overweeg entry naar ~4308 (waar kopers zich toonden) om niet weer op 2-3 pt te missen; SL blijft 4285 => RR t/m 4360 nog ~2.3. Range nu 4305-4376 (4376 = research-weerstand). NIET chasen op 4341 (midden). Trend-mee dip-buy. Doelen 4360, 4400, 4430."
+      "invalidation": "H1-close onder 4288 = setup dood. UPDATE 11-08: BREAKOUT gespeeld — goud brak 4376 en rende naar ~4432-high (Tue 11), nu pullback naar ~4361. Gebruiker's buy-limit staat nu 0.07 @ 4307.88 (omhoog van 4304.97), SL 4288.64, TWEE TP's 4400.05 / 4500.18 (mobiele multi-TP). NOG NIET gevuld — prijs bleef ~54pt boven de limit tijdens de rally (3e keer dat de dip wegliep). Limit fungeert nu als diepe-dip-vanger (fill ~4308 => TP 4400 = RR ~4.8, TP 4500 = RR ~10). LET OP CPI wo 12 aug ~12:30 UTC: hete print kan door 4307 naar 4288-stop whipsawen (Rule 12) — beslis vóór 12:30 of je de limit door CPI houdt of weghaalt."
     },
     {
       "id": "2026-08-07-uptrend-dipbuy-long-4248",
