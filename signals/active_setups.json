@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "updated_utc": "2026-08-11T20:12:27Z",
+  "updated_utc": "2026-08-12T20:12:08Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
       "id": "2026-08-09-breakout-retest-long-4305",
-      "status": "active",
+      "status": "expired",
       "direction": "long",
       "order_type": "limit",
       "entry": 4307.88,
