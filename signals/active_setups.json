@@ -1,20 +1,20 @@
 {
   "version": 1,
-  "updated_utc": "2026-08-12T20:12:08Z",
+  "updated_utc": "2026-08-13T23:04:57Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
       "id": "2026-08-13-pullback-dipbuy-long-4342",
-      "status": "active",
+      "status": "rejected",
       "direction": "long",
       "order_type": "limit",
-      "entry": 4342.0,
-      "stop_loss": 4322.0,
+      "entry": 4353.0,
+      "stop_loss": 4338.0,
       "take_profits": [
-        4390.0,
-        4410.0,
+        4380.0,
+        4400.0,
         4440.0
       ],
       "conviction": "B",
@@ -22,8 +22,9 @@
       "htf_bias": "bullish",
       "valid_until_utc": "2026-08-15T20:00:00Z",
       "live_manual": true,
-      "invalidation": "H1-close onder 4320 = pullback wordt correctie. Goud viel van de 4448-top terug naar ~4361 (mogelijk dubbele top 4432/4448 = lower-high-waarschuwing). H1-uptrend structureel intact boven ~4300, maar korte-termijn DOWN. Trend-mee dip-buy op de 4340-support (rond + ~50% van de laatste leg). NIET market-buyen op 4361 (midden in de pullback, dalend). LET OP: breekt 4350 en houdt -> wachten, dieper naar 4320/4305; en het is do-avond -> vr/weekend-risico, kleiner sizen.",
-      "note": "Beste limit-setup gevraagd (screenshots H1/m15/m5 ~4361). Deeper alt-catch: buy-limit 4305 (breakout-base), stop 4285, doelen 4360/4400/4440. Executie dry-run + consec-halt; WhatsApp uit."
+      "invalidation": "H1-close onder 4338 = bounce faalt (dan dieper 4320/4305). UPDATE 13-08 23:04Z: goud viel van 4448-top terug naar de 4340-4348-support (prior consolidatie-shelf van di 11) en toont de EERSTE bounce: wick naar ~4344, herstel naar 4353. Confirmation-long: entry ~4353 op een HOLD/reclaim van 4360, stop 4338 (onder de 4344-wick, ~15pt), doelen 4380/4400/4440 (RR ~1.8 t/m 4380, ~3 t/m 4400). NIET kopen als 4344 breekt zonder reactie. LET OP: (a) breaker HALT (4 losses) -> bewuste resume + KLEIN sizen (0.07); (b) 23:04Z = overnight/thin liquidity, whipsaw-risico; (c) VERPLICHT BE bij +1R (~4368) zodat het geen loss #5 wordt (Rule 22).",
+      "note": "Confirmation-long op de 4340-support-bounce (screenshots H1 ~4353). Bounce tentatief -> bevestiging vereist (hold >4353 / reclaim 4360). Executie dry-run + consec-halt; WhatsApp uit.",
+      "rejected_reason": "RR 1.80 < 2.0 tot TP1"
     },
     {
       "id": "2026-08-12-uptrend-pullback-long-4400",
