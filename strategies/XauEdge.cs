@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using cAlgo.API;
 using cAlgo.API.Indicators;
@@ -17,7 +18,7 @@ using cAlgo.API.Internals;
 //   onder de laagste low (short), in de trendrichting. Geen counter-trend, geen ruis-signalen.
 //
 // RISICO (niet-onderhandelbaar, zelfde scaffolding als de andere bots + risk_guard.py):
-//   %-risk sizing, ATR-stop, vaste RR-TP, break-even + ATR-trailing, spread- & sessie-filter,
+//   %-risk sizing, ATR-stop, vaste RR-TP, break-even + partial + ATR-trailing, spread- & sessie-filter,
 //   dag-circuit-breaker (verliesreeks + dagverlies) EN totaal-DD-halt (prop-bescherming).
 //   Geen martingale, geen grid, altijd een harde stop.
 //
@@ -47,6 +48,12 @@ namespace cAlgo.Robots
         public double RiskPct { get; set; }
         [Parameter("Trail at ATR x (0=off)", Group = "Risk", DefaultValue = 1.5, MinValue = 0)]
         public double TrailAtr { get; set; }
+        [Parameter("Break-even at R (0=off)", Group = "Risk", DefaultValue = 1.0, MinValue = 0)]
+        public double BreakEvenAtR { get; set; }
+        [Parameter("Partial at R (0=off)", Group = "Risk", DefaultValue = 1.0, MinValue = 0)]
+        public double PartialAtR { get; set; }
+        [Parameter("Partial close %", Group = "Risk", DefaultValue = 33, MinValue = 0, MaxValue = 90)]
+        public double PartialPct { get; set; }
 
         // ---- Veiligheid ----
         [Parameter("Max spread (pips)", Group = "Safety", DefaultValue = 30, MinValue = 1)]
@@ -70,6 +77,8 @@ namespace cAlgo.Robots
         private int _consec;
         private double _dayStart, _initBal;
         private bool _haltDay, _haltRun;
+        private readonly Dictionary<int, double> _riskById = new Dictionary<int, double>(); // init-risk (prijs) per positie, voor R-berekening
+        private readonly HashSet<int> _partialed = new HashSet<int>();                      // posities waar de partial al genomen is
 
         protected override void OnStart()
         {
@@ -83,10 +92,16 @@ namespace cAlgo.Robots
                   TrendEma, BreakoutBars, AtrMult, RR, RiskPct);
         }
 
+        // Beheer op ELKE tick: break-even + partial + trailing — ook tijdens een halt, zodat open
+        // posities altijd beheerd worden. Entries blijven in OnBar (bar-based signaal, geen repaint).
+        protected override void OnTick()
+        {
+            Manage();
+        }
+
         protected override void OnBar()
         {
             if (Server.Time.Date != _day) NewDay();
-            Trail();
             if (_haltRun || _haltDay) return;
             if (Server.Time.Hour < SessStart || Server.Time.Hour >= SessEnd) return;
             if ((Symbol.Ask - Symbol.Bid) / Symbol.PipSize > MaxSpread) return;
@@ -129,6 +144,7 @@ namespace cAlgo.Robots
                     var r = ExecuteMarketOrder(side, SymbolName, vol, Label, slPips, tpPips);
                     if (r.IsSuccessful)
                     {
+                        _riskById[r.Position.Id] = slPips * Symbol.PipSize; // init-risk in prijs, voor BE/partial-R
                         Print("{0} @ {1} | SL {2:0.0}p TP {3:0.0}p", side, r.Position.EntryPrice, slPips, tpPips);
                         return;
                     }
@@ -138,25 +154,57 @@ namespace cAlgo.Robots
             }
         }
 
-        private void Trail()
+        // Actief positie-beheer: (1) partial op +PartialAtR·R, (2) stop naar break-even op
+        // +BreakEvenAtR·R, (3) ATR-trailing voor de runner. Dit is de fix voor "winnaars teruggeven":
+        // zodra de trade +1R staat gaat de stop naar entry en pakken we een deel winst.
+        private void Manage()
         {
-            if (TrailAtr <= 0) return;
             double atr = _atr.Result.LastValue;
             foreach (var p in Positions)
             {
                 if (p.Label != Label || p.SymbolName != SymbolName) continue;
                 bool lng = p.TradeType == TradeType.Buy;
                 double price = lng ? Symbol.Bid : Symbol.Ask;
-                if ((lng ? price - p.EntryPrice : p.EntryPrice - price) < atr * TrailAtr) continue;
-                double sl = lng ? price - atr * TrailAtr : price + atr * TrailAtr;
-                if (!p.StopLoss.HasValue || (lng ? sl > p.StopLoss.Value : sl < p.StopLoss.Value))
-                    try { ModifyPosition(p, sl, p.TakeProfit); } catch { }
+                double profit = lng ? price - p.EntryPrice : p.EntryPrice - price;
+
+                double risk;
+                if (!_riskById.TryGetValue(p.Id, out risk) || risk <= 0)
+                    risk = p.StopLoss.HasValue ? Math.Abs(p.EntryPrice - p.StopLoss.Value) : atr * AtrMult; // fallback (bv. na herstart)
+                if (risk <= 0) continue;
+
+                // 1) Partial (eenmalig): markeer eerst -> geen dubbele partial bij snelle ticks.
+                if (PartialAtR > 0 && PartialPct > 0 && !_partialed.Contains(p.Id) && profit >= risk * PartialAtR)
+                {
+                    _partialed.Add(p.Id);
+                    double closeVol = Symbol.NormalizeVolumeInUnits(p.VolumeInUnits * (PartialPct / 100.0), RoundingMode.Down);
+                    if (closeVol >= Symbol.VolumeInUnitsMin && closeVol < p.VolumeInUnits)
+                        try { var pr = ClosePosition(p, closeVol); if (pr.IsSuccessful) Print("Partial {0}% @ +{1:0.0}R", PartialPct, profit / risk); }
+                        catch (Exception ex) { Print("Partial-fout: {0}", ex.Message); }
+                }
+
+                // 2) Break-even: stop naar entry zodra +BreakEvenAtR·R.
+                if (BreakEvenAtR > 0 && profit >= risk * BreakEvenAtR)
+                {
+                    double be = p.EntryPrice;
+                    if (!p.StopLoss.HasValue || (lng ? p.StopLoss.Value < be : p.StopLoss.Value > be))
+                        try { ModifyPosition(p, be, p.TakeProfit); } catch (Exception ex) { Print("BE-fout: {0}", ex.Message); }
+                }
+
+                // 3) ATR-trailing voor de runner (pas voorbij TrailAtr in de winst).
+                if (TrailAtr > 0 && profit >= atr * TrailAtr)
+                {
+                    double sl = lng ? price - atr * TrailAtr : price + atr * TrailAtr;
+                    if (!p.StopLoss.HasValue || (lng ? sl > p.StopLoss.Value : sl < p.StopLoss.Value))
+                        try { ModifyPosition(p, sl, p.TakeProfit); } catch { }
+                }
             }
         }
 
         private void OnClosed(PositionClosedEventArgs a)
         {
             if (a.Position.Label != Label) return;
+            _riskById.Remove(a.Position.Id);
+            _partialed.Remove(a.Position.Id);
             if (a.Position.NetProfit < 0) _consec++; else if (a.Position.NetProfit > 0) _consec = 0;
             double dayPnl = Account.Balance - _dayStart;
             if (MaxConsecLosses > 0 && _consec >= MaxConsecLosses) { _haltDay = true; Print("HALT dag: {0} losses op rij.", _consec); }
