@@ -120,8 +120,22 @@ namespace cAlgo.Robots
             if (Symbol.PipValue <= 0 || slPips <= 0) return;
             double vol = Symbol.NormalizeVolumeInUnits(risk / (slPips * Symbol.PipValue), RoundingMode.Down);
             if (vol < Symbol.VolumeInUnitsMin) return;
-            var r = ExecuteMarketOrder(side, SymbolName, vol, Label, slPips, tpPips);
-            if (r.IsSuccessful) Print("{0} @ {1} | SL {2:0.0}p TP {3:0.0}p", side, r.Position.EntryPrice, slPips, tpPips);
+            // Robuuste entry: synchroon, IsSuccessful-check + 1 retry, alles in try/catch.
+            // (cTrader's fault-tolerance negeert veel fouten en laat de bot dóórlopen -> zelf afvangen.)
+            for (int attempt = 1; attempt <= 2; attempt++)
+            {
+                try
+                {
+                    var r = ExecuteMarketOrder(side, SymbolName, vol, Label, slPips, tpPips);
+                    if (r.IsSuccessful)
+                    {
+                        Print("{0} @ {1} | SL {2:0.0}p TP {3:0.0}p", side, r.Position.EntryPrice, slPips, tpPips);
+                        return;
+                    }
+                    Print("Entry mislukt (poging {0}): {1}", attempt, r.Error);
+                }
+                catch (Exception ex) { Print("Entry-exceptie (poging {0}): {1}", attempt, ex.Message); }
+            }
         }
 
         private void Trail()
@@ -153,6 +167,15 @@ namespace cAlgo.Robots
         private void NewDay()
         {
             _day = Server.Time.Date; _consec = 0; _dayStart = Account.Balance; _haltDay = false;
+        }
+
+        // Last-resort vangnet: cTrader negeert veel fouten en laat de bot dóórlopen. Bij een
+        // exceptie die hier landt: stop nieuwe entries (bestaande posities houden hun server-side
+        // SL/TP). Staat NIET in de default template -> bewust toegevoegd.
+        protected override void OnException(Exception exception)
+        {
+            _haltRun = true;
+            Print("OnException -> nieuwe entries gestopt (SL/TP blijven server-side): {0}", exception.Message);
         }
     }
 }
