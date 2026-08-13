@@ -28,7 +28,7 @@
     {
       "id": "2026-08-12-uptrend-pullback-long-4400",
       "status": "stopped",
-      "result": "Prijs tikte ~4448-top, draaide en viel terug door 4400 en 4381 naar ~4361. Long 0.15 @ 4399.96 GESTOPT op SL 4381.27 (~-1R, ~-$281.67) TENZIJ gebruiker eerder handmatig op break-even sloot (exit-prijs TBC). Les: BE-stop bij TP1/4440-nadering was hier de fix. WhatsApp uit.",
+      "result": "BEVESTIGD door gebruiker: SL geraakt. Long 0.15 @ 4399.96 gestopt op SL 4381.27 = -1R (-$281.67). Prijs tikte ~4448-top, draaide (dubbele top 4432/4448) en viel terug door 4400 en 4381. Geen BE-stop gezet -> volle -1R i.p.v. break-even. Les: SL naar BE bij TP1/4440-nadering. Geboekt in risk_guard (consec-losses nu 4, halt actief). WhatsApp uit.",
       "direction": "long",
       "order_type": "limit",
       "entry": 4400.0,

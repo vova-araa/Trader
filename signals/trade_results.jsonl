@@ -4,3 +4,4 @@
 {"t":"2026-07-30T08:00:00Z","r":-1.5,"pnl":-185.69,"note":"short 0.08 lot uitgestopt (~23pt, slippage/beweging). R geschat."}
 {"t":"2026-07-30T11:00:00Z","r":-1.4,"pnl":-180.72,"note":"short 0.10 lot uitgestopt (~18pt). R geschat."}
 {"t":"2026-07-30T16:00:00Z","r":-0.15,"pnl":-18.92,"note":"short scratch (~2pt). Live cTrader."}
+{"t": "2026-08-13T18:30:08Z", "r": -1.0, "pnl": -281.67, "note": "Long 0.15 @ 4399.96 gestopt op SL 4381.27 na terugval van 4448-top (geen BE-stop gezet). Les: BE bij TP1/4440."}
