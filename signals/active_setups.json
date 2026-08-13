@@ -23,8 +23,7 @@
       "valid_until_utc": "2026-08-15T20:00:00Z",
       "live_manual": true,
       "invalidation": "H1-close onder 4338 = bounce faalt (dan dieper 4320/4305). UPDATE 13-08 23:04Z: goud viel van 4448-top terug naar de 4340-4348-support (prior consolidatie-shelf van di 11) en toont de EERSTE bounce: wick naar ~4344, herstel naar 4353. Confirmation-long: entry ~4353 op een HOLD/reclaim van 4360, stop 4338 (onder de 4344-wick, ~15pt), doelen 4380/4400/4440 (RR ~1.8 t/m 4380, ~3 t/m 4400). NIET kopen als 4344 breekt zonder reactie. LET OP: (a) breaker HALT (4 losses) -> bewuste resume + KLEIN sizen (0.07); (b) 23:04Z = overnight/thin liquidity, whipsaw-risico; (c) VERPLICHT BE bij +1R (~4368) zodat het geen loss #5 wordt (Rule 22).",
-      "note": "Confirmation-long op de 4340-support-bounce (screenshots H1 ~4353). Bounce tentatief -> bevestiging vereist (hold >4353 / reclaim 4360). Executie dry-run + consec-halt; WhatsApp uit.",
-      "rejected_reason": "RR 1.80 < 2.0 tot TP1"
+      "note": "Confirmation-long op de 4340-support-bounce (screenshots H1 ~4353). Bounce tentatief -> bevestiging vereist (hold >4353 / reclaim 4360). TP1 4385 (RR ~2.1) na pipeline-reject van 4380 (RR 1.8 < 2). Executie dry-run + consec-halt; WhatsApp uit."
     },
     {
       "id": "2026-08-12-uptrend-pullback-long-4400",
