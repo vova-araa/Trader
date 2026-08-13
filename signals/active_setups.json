@@ -23,7 +23,10 @@
       "valid_until_utc": "2026-08-14T20:00:00Z",
       "invalidation": "H1-close onder 4380 = pullback-structuur breekt. POST-CPI (koel 12-08): goud brak 4376 decisief, tikte ~4450-high, herstelde de dip -> uptrend overtuigend (breakout + catalyst + nieuwe highs) = hoogste-convictie trend-long. A-tier MITS via de pullback: buy-limit op de 4400-retest (rond getal + gebroken-4376-weerstand -> nu support + basing-zone). NIET market-buy op ~4418 (vlak onder de highs, extended). Doelen 4445 (recente high), 4470, 4500 (research-zone). RR ~2.5 t/m 4445.",
       "live_manual": true,
-      "note": "Beste A-setup gevraagd door gebruiker (screenshots ~4418). Levels op cTrader-spot. UPDATE 13-08: gebruiker plaatste de buy-limit LIVE @ 4400 met 0.15 lots. 4400 HIELD als support (dip -> bounce naar ~4424) -> niveau bevestigd, maar limit mogelijk net gemist als de bounce voor de tag kwam (Blotter checken: filled of pending?). LET OP SIZING: 0.15 lots is groter dan de gebruikelijke 0.07-0.10 -> bij stop 4382 (18pt) is de risk-per-trade fors; check dat dit binnen je %-risk past. Executie dry-run + consec-halt; WhatsApp uit."
+      "filled": true,
+      "filled_price": 4399.96,
+      "filled_utc": "2026-08-13T02:47:00Z",
+      "note": "Beste A-setup gevraagd door gebruiker. GEVULD 13-08 op de 4400-dip: LIVE long 0.15 @ 4399.96, SL 4381.27, gescheiden TP's 4440.25 (+$160.80) / 4469.85 (+$488.61) / 4500.06 (+$400.04). Risk bij SL ~$281.67; totale reward ~$1049 als alles vult => blended RR ~3.7:1. Nu ~4409 (+$137 open). Management: SL naar break-even (4400) zodra TP1/higher-low, dan risicovrije runner. Sizing 0.15 = ~$282 risk; check dat dit binnen %-risk past (op prop ≤1-2% account). Executie: gebruiker live-manual; pipeline dry-run + consec-halt; WhatsApp uit."
     },
     {
       "id": "2026-08-09-breakout-retest-long-4305",
