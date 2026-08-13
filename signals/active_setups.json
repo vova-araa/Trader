@@ -7,14 +7,14 @@
   "setups": [
     {
       "id": "2026-08-13-pullback-dipbuy-long-4342",
-      "status": "rejected",
+      "status": "active",
       "direction": "long",
       "order_type": "limit",
       "entry": 4353.0,
       "stop_loss": 4338.0,
       "take_profits": [
-        4380.0,
-        4400.0,
+        4385.0,
+        4410.0,
         4440.0
       ],
       "conviction": "B",
