@@ -6,8 +6,29 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-08-13-pullback-dipbuy-long-4342",
+      "id": "2026-08-14-deep-dipbuy-long-4305",
       "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4305.0,
+      "stop_loss": 4288.0,
+      "take_profits": [
+        4345.0,
+        4390.0,
+        4440.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bullish",
+      "valid_until_utc": "2026-08-15T20:00:00Z",
+      "live_manual": true,
+      "invalidation": "H1-close onder 4288 = correctie verdiept, uptrend-thesis in twijfel (dan 4280/4250 + herbeoordelen). 14-08 00:40Z: 4340-shelf BRAK, correctie verdiept van de 4448-top naar 4335. Volgende ECHTE support = 4300-4310 = breakout-base + ~61.8% fib van de 4225->4448-leg (4310) + rond 4300 = sterkste confluence. Buy-limit/confirmation-long op 4300-4310, stop 4288 (~17pt), doelen 4345 (RR ~2.4)/4390/4440. NIET de knife kopen boven 4305; wacht op tag+reactie of een schone bounce. LET OP: breaker HALT (4 losses) -> bewuste resume + KLEIN (0.04-0.07); overnight thin; VERPLICHT BE bij +1R (Rule 22).",
+      "note": "Diepere dip-buy nadat de 4340-bounce faalde (H1 ~4335). 4300-4310 = het echte support. Executie dry-run + consec-halt; WhatsApp uit."
+    },
+    {
+      "id": "2026-08-13-pullback-dipbuy-long-4342",
+      "status": "invalidated",
+      "result": "NIET getriggerd (we wachtten op bevestiging die niet kwam) = GEEN loss. 4340-4348-shelf brak: na de tentatieve bounce naar 4353 viel prijs door naar ~4335. De discipline (wacht op groene H1-close, koop niet de knife) bespaarde loss #5. Vervangen door de diepere 4305-dipbuy.",
       "direction": "long",
       "order_type": "limit",
       "entry": 4353.0,
