@@ -1,21 +1,21 @@
 {
   "version": 1,
-  "updated_utc": "2026-08-13T23:04:57Z",
+  "updated_utc": "2026-08-17T19:36:37Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
       "id": "2026-08-14-deep-dipbuy-long-4305",
-      "status": "active",
+      "status": "expired",
       "direction": "long",
       "order_type": "limit",
-      "entry": 4305.0,
-      "stop_loss": 4288.0,
+      "entry": 4315.22,
+      "stop_loss": 4291.09,
       "take_profits": [
-        4345.0,
-        4390.0,
-        4440.0
+        4360.0,
+        4400.0,
+        4448.0
       ],
       "conviction": "B",
       "regime": "trend",
@@ -23,7 +23,7 @@
       "valid_until_utc": "2026-08-15T20:00:00Z",
       "live_manual": true,
       "invalidation": "H1-close onder 4288 = correctie verdiept, uptrend-thesis in twijfel (dan 4280/4250 + herbeoordelen). 14-08 00:40Z: 4340-shelf BRAK, correctie verdiept van de 4448-top naar 4335. Volgende ECHTE support = 4300-4310 = breakout-base + ~61.8% fib van de 4225->4448-leg (4310) + rond 4300 = sterkste confluence. Buy-limit/confirmation-long op 4300-4310, stop 4288 (~17pt), doelen 4345 (RR ~2.4)/4390/4440. NIET de knife kopen boven 4305; wacht op tag+reactie of een schone bounce. LET OP: breaker HALT (4 losses) -> bewuste resume + KLEIN (0.04-0.07); overnight thin; VERPLICHT BE bij +1R (Rule 22).",
-      "note": "Diepere dip-buy nadat de 4340-bounce faalde (H1 ~4335). 4300-4310 = het echte support. Executie dry-run + consec-halt; WhatsApp uit."
+      "note": "Diepere dip-buy. LIVE (gebruiker, met stops): leg-1 0.10 @ 4315.22 (SL 4291.09), leg-2 0.10 @ 4302.32 (SL 4284.53). Stops toegevoegd (goed). UPDATE ~18-19/08: goud rallyde van de ~4310-low terug naar ~4415 = tegen de 4432/4448-DUBBELTOP -> limits staan nu ~100pt onder de markt (flush-verzekering, niet de directe actie). Beslissing zit bij 4432-4448: break+hold boven 4448 = continuatie-long op de retest (doel 4480/4500); rejection = pullback-buy 4380-4390 of de diepe 4315/4302-limits. NIET chasen op 4415 (onder resistance). Sizing 0.10x2 nog aan de forse kant na 4 losses. LET OP Jackson Hole/FOMC-minutes deze week (Rule 12). Executie dry-run + consec-halt; WhatsApp uit."
     },
     {
       "id": "2026-08-13-pullback-dipbuy-long-4342",
