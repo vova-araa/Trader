@@ -6,8 +6,29 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-08-14-deep-dipbuy-long-4305",
+      "id": "2026-08-20-breakout-retest-long-4502",
       "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4502.0,
+      "stop_loss": 4484.0,
+      "take_profits": [
+        4540.0,
+        4570.0,
+        4600.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bullish",
+      "valid_until_utc": "2026-08-21T12:00:00Z",
+      "live_manual": true,
+      "invalidation": "H1-close onder 4482 = breakout faalt, terug onder de 4500-ronde (dan 4448-retest). 20-08 22:03Z: goud BRAK de 4432/4448-dubbeltop (die na 3 tests + hogere lows omhoog oploste, zoals de ascending-druk-read zei) en rende naar ~4525; consolideert nu 4500-4525 = bull-flag boven de gebroken zone. Trend-mee retest-buy op 4500-4505 (gebroken rond getal + breakout-shelf -> support), stop 4484 (18pt), doelen 4540 (RR 2.1) / 4570 (measured move 4310->4448-leg ~4586) / 4600. NIET chasen op 4518. VALID TOT VRIJDAG 12:00 UTC: Jackson Hole / Powell-speech is vrijdag (~14:00 UTC) — Rule 12: limit NIET blind door de speech; vooraf weghalen of pas na de reactie herplaatsen. Breaker HALT -> bewuste resume + klein (0.05-0.07) + VERPLICHT BE bij +1R.",
+      "note": "Breakout-retest na de 4448-break. De oude diepe limits 4315.22/4302.32 zijn 200pt onder de markt = stale (advies: cancel — vullen alleen nog in een Powell-crash). Executie dry-run + consec-halt; WhatsApp uit."
+    },
+    {
+      "id": "2026-08-14-deep-dipbuy-long-4305",
+      "status": "superseded",
+      "supersede_note": "20-08: prijs 4518 na de 4448-breakout; limits 4315.22/4302.32 staan 200pt onder de markt = thesis achterhaald (waren dip-catchers in de correctie die al bodemde op 4310). Advies aan gebruiker: CANCEL beide — een fill is alleen nog mogelijk in event-carnage (Powell vrijdag) en dan is de 'support' waarschijnlijk geen support meer. Vervangen door 4502-breakout-retest.",
       "direction": "long",
       "order_type": "limit",
       "entry": 4315.22,
