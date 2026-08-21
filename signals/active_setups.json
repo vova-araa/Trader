@@ -20,9 +20,9 @@
       "conviction": "B",
       "regime": "trend",
       "htf_bias": "bullish",
-      "valid_until_utc": "2026-08-21T12:00:00Z",
+      "valid_until_utc": "2026-08-21T20:00:00Z",
       "live_manual": true,
-      "invalidation": "H1-close onder 4482 = breakout faalt, terug onder de 4500-ronde (dan 4448-retest). 20-08 22:03Z: goud BRAK de 4432/4448-dubbeltop (die na 3 tests + hogere lows omhoog oploste, zoals de ascending-druk-read zei) en rende naar ~4525; consolideert nu 4500-4525 = bull-flag boven de gebroken zone. Trend-mee retest-buy op 4500-4505 (gebroken rond getal + breakout-shelf -> support), stop 4484 (18pt), doelen 4540 (RR 2.1) / 4570 (measured move 4310->4448-leg ~4586) / 4600. NIET chasen op 4518. VALID TOT VRIJDAG 12:00 UTC: Jackson Hole / Powell-speech is vrijdag (~14:00 UTC) — Rule 12: limit NIET blind door de speech; vooraf weghalen of pas na de reactie herplaatsen. Breaker HALT -> bewuste resume + klein (0.05-0.07) + VERPLICHT BE bij +1R.",
+      "invalidation": "H1-close onder 4482 = breakout faalt, terug onder de 4500-ronde (dan 4448-retest). 20-08 22:03Z: goud BRAK de 4432/4448-dubbeltop (die na 3 tests + hogere lows omhoog oploste, zoals de ascending-druk-read zei) en rende naar ~4525; consolideert nu 4500-4525 = bull-flag boven de gebroken zone. Trend-mee retest-buy op 4500-4505 (gebroken rond getal + breakout-shelf -> support), stop 4484 (18pt), doelen 4540 (RR 2.1) / 4570 (measured move 4310->4448-leg ~4586) / 4600. NIET chasen op 4518. CORRECTIE 21-08: Jackson Hole is VOLGENDE week (27-29 aug, Fed-chair-keynote vr 28 ~14:00 UTC), niet vandaag. Vandaag alleen flash PMI's ~13:45 UTC (medium impact; consensus mfg 53.9, services 54.0 vs 54.6). FOMC-minutes waren wo 19-08 al. Rule 12 blijft: wees alert rond 13:45 UTC, maar dit is geen Powell-klasse event. Breaker HALT -> bewuste resume + klein (0.05-0.07) + VERPLICHT BE bij +1R.",
       "note": "Breakout-retest na de 4448-break. De oude diepe limits 4315.22/4302.32 zijn 200pt onder de markt = stale (advies: cancel — vullen alleen nog in een Powell-crash). Executie dry-run + consec-halt; WhatsApp uit."
     },
     {
