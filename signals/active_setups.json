@@ -6,8 +6,29 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-08-20-breakout-retest-long-4502",
+      "id": "2026-08-24-trend-pullback-long-4603",
       "status": "active",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4603.0,
+      "stop_loss": 4586.0,
+      "take_profits": [
+        4640.0,
+        4660.0,
+        4700.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bullish",
+      "valid_until_utc": "2026-08-25T20:00:00Z",
+      "live_manual": true,
+      "invalidation": "H1-close onder 4585 = pullback wordt dieper (dan 4560-4565, daarna 4520). 24-08 04:02Z: goud explodeerde van de 4325-low (wo 19) naar 4658-high, nu ~4638 — de 4448-breakout werd een volle trend-leg (+300pt in 3 sessies). PARABOLISCH EXTENDED: niet chasen op 4638. Trend-mee pullback-buy op 4600-4605 (rond getal + m15-breakout-shelf van de laatste leg), stop 4586 (17pt), doelen 4640 (RR 2.2) / 4660 (high) / 4700. Steun-ladder eronder: 4560-4565, 4520. LET OP: (a) Azie-sessie/thin; (b) parabolische moves kunnen scherp mean-reverten — BE bij +1R VERPLICHT, klein (0.05-0.07); (c) JACKSON HOLE keynote VRIJDAG 28 aug ~14:00 UTC = het event van de week (Rule 12); (d) GEEN shorts tegen deze trend (Rule 14), hoe extended het ook oogt.",
+      "note": "Trend-pullback na de parabolische leg. VRAAG AAN GEBRUIKER: is de 4502-limit vrijdag GEVULD op de dip (~4460-low) en dus gestopt op 4484 (-1R), of was 'ie al weggehaald/expired? Blotter checken -> resultaat boeken in risk_guard. Executie dry-run + consec-halt; WhatsApp uit."
+    },
+    {
+      "id": "2026-08-20-breakout-retest-long-4502",
+      "status": "closed_unknown",
+      "close_note": "Prijs dipte do-nacht/vr naar ~4460 (onder entry 4502 EN onder stop 4484) voordat de rally naar 4658 kwam. ALS de gebruiker de limit had geplaatst: gevuld + gestopt = -1R (boeken!). Als niet geplaatst/weggehaald: geen schade. Gebruiker bevestigt via Blotter.",
       "direction": "long",
       "order_type": "limit",
       "entry": 4502.0,
