@@ -33,6 +33,17 @@ circuit breaker + totaal-DD-halt (idee van `risk_guard`). Compileren + backteste
 optimaliseer op profit factor/drawdown, NIET op win rate. Proces (walk-forward etc.): `docs/XAUEDGE.md`;
 bot-details: `docs/XAUSCALPER.md`.
 
+## cTrader MCP + skill `xauusd-ctrader`
+
+Spotware heeft **officiële cTrader MCP-servers** (lokaal `http://127.0.0.1:9876/mcp/` bij een
+draaiende desktop; remote voor cTrader Web via bearer-token uit Web → Settings → MCP; docs:
+help.ctrader.com/ctrader-ai-agent-connect). Het project-skill
+`.claude/skills/xauusd-ctrader/SKILL.md` bevat de volledige goud-workflow daarvoor (MTF-trendbars,
+SMC/ICT top-down, killzones, confluence-score ≥3, news-blackout, volume-conversie in lots + raw
+units) — gebruik dat skill bij elke goud-analyse ZODRA een cTrader-MCP verbonden is; zonder MCP:
+bestaande workflow (screenshots/Zapier). Orders via MCP alléén na expliciete bevestiging van de
+gebruiker in de chat, en altijd binnen de risk_guard-pipeline hieronder.
+
 ## WhatsApp-notificatie — UITGESCHAKELD (per gebruiker, 2026-08-09)
 
 **Stuur GEEN WhatsApp meer.** De gebruiker wil de setups rechtstreeks in de chat, niet via
