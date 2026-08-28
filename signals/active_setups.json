@@ -7,11 +7,11 @@
   "setups": [
     {
       "id": "2026-08-28-correction-short-4607",
-      "status": "rejected",
+      "status": "active",
       "direction": "short",
       "order_type": "market",
       "entry": 4607.17,
-      "stop_loss": 4607.17,
+      "stop_loss": 4625.0,
       "take_profits": [
         4550.0,
         4520.0,
@@ -24,8 +24,7 @@
       "live_manual": true,
       "filled": true,
       "invalidation": "H1-close boven 4625 = correctie voorbij. LIVE SHORT gebruiker: 0.07 @ 4607.17, TP 4500.41, prijs 4580 (+26pt). Korte-termijn structuur IS down (lower highs 4690->4665->4640->4620) dus dit is correctie-mee, maar tegen de grote bull (goud +14% in aug) -> alleen met BE-bescherming door het event. KEYNOTE WARSH 14:00 UTC (eerste als Fed-chair; BofA-survey: 53% neutraal / 31% hawkish / 7% dovish; markt vreest zelfs sept-HIKE). Hawkish = short wint richting 4520/4500; neutraal/dovish = relief-bounce omhoog. VERPLICHT VOOR 14:00Z: SL naar BE 4607 (staat genoteerd als BE) + partial ~50% -> risicovrije runner door de speech. Geen bijverkopen.",
-      "note": "htf_bias 'bearish' = korte-termijn correctie-structuur (guard-conform); grote trend blijft bullish. SL-status bij broker onbekend op screenshot -> gebruiker MOET stop zetten (minimaal BE). Blotter-vragen ladder/4502 nog open.",
-      "rejected_reason": "geen geldige SL/TP"
+      "note": "htf_bias 'bearish' = korte-termijn correctie-structuur (guard-conform); grote trend blijft bullish. SL-status bij broker onbekend op screenshot -> gebruiker MOET stop zetten (minimaal BE). Blotter-vragen ladder/4502 nog open."
     },
     {
       "id": "2026-08-24-trend-pullback-long-4603",
