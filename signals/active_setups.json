@@ -6,6 +6,26 @@
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
+      "id": "2026-08-31-premium-fade-short-4553",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4553.0,
+      "stop_loss": 4572.0,
+      "take_profits": [
+        4500.0,
+        4460.0,
+        4435.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bearish",
+      "valid_until_utc": "2026-09-01T20:00:00Z",
+      "live_manual": true,
+      "invalidation": "H1-close boven 4572 = correctie-structuur voorbij (dan is de bull terug richting 4600+). SHORT-kant na de hawkish Warsh-crash (4690->4448): korte-termijn structuur = lower highs, dus een bounce IN premium mag gefade worden. Sell-limit 4553 = 61.8% retrace van de 4620->4448-leg (~4554) + het do-shelf 4540-4560 dat als support brak -> nu resistance. Stop 4572 (19pt), doelen 4500 (RR 2.8) / 4460 / 4435. Rule 17 OK: entry >100pt boven de 4432-support. NIET shorten op 4459 (op support). Alternatief-scenario (advies, geen order): H1-close ONDER 4432 -> short de retest van 4440-4448 van onderaf, stop 4462, doelen 4380/4340/4310. Klein (0.05-0.07), BE bij +1R.",
+      "note": "Samen met de 4435-long vormt dit een coherent bracket op de post-crash range: koop de basis (4435), fade de premium-bounce (4553) - de markt kiest welke triggert. Beide klein. Executie dry-run; WhatsApp uit."
+    },
+    {
       "id": "2026-08-31-basis-retest-long-4435",
       "status": "active",
       "direction": "long",
