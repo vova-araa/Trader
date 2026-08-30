@@ -7,7 +7,7 @@
   "setups": [
     {
       "id": "2026-08-28-correction-short-4607",
-      "status": "active",
+      "status": "won_probable",
       "direction": "short",
       "order_type": "market",
       "entry": 4607.17,
@@ -24,7 +24,8 @@
       "live_manual": true,
       "filled": true,
       "invalidation": "H1-close boven 4625 = correctie voorbij. LIVE SHORT gebruiker: 0.07 @ 4607.17, TP 4500.41, prijs 4580 (+26pt). Korte-termijn structuur IS down (lower highs 4690->4665->4640->4620) dus dit is correctie-mee, maar tegen de grote bull (goud +14% in aug) -> alleen met BE-bescherming door het event. KEYNOTE WARSH 14:00 UTC (eerste als Fed-chair; BofA-survey: 53% neutraal / 31% hawkish / 7% dovish; markt vreest zelfs sept-HIKE). Hawkish = short wint richting 4520/4500; neutraal/dovish = relief-bounce omhoog. VERPLICHT VOOR 14:00Z: SL naar BE 4607 (staat genoteerd als BE) + partial ~50% -> risicovrije runner door de speech. Geen bijverkopen.",
-      "note": "htf_bias 'bearish' = korte-termijn correctie-structuur (guard-conform); grote trend blijft bullish. SL-status bij broker onbekend op screenshot -> gebruiker MOET stop zetten (minimaal BE). Blotter-vragen ladder/4502 nog open."
+      "note": "htf_bias 'bearish' = korte-termijn correctie-structuur (guard-conform); grote trend blijft bullish. SL-status bij broker onbekend op screenshot -> gebruiker MOET stop zetten (minimaal BE). Blotter-vragen ladder/4502 nog open.",
+      "result": "WAARSCHIJNLIJK GEWONNEN (Blotter TBC): Warsh-keynote vr 28-08 was HAWKISH -> goud crashte van ~4620 naar ~4448 low, dwars door de TP 4500.41. Short 0.07 @ 4607.17 -> TP-fill = +106.76pt x 7oz = ~+$747. Grootste winnaar tot nu toe; het risicovrij-door-het-event-plan (BE+runner) betaalde precies uit zoals bedoeld. NA BLOTTER-BEVESTIGING: boeken in risk_guard (winst RESET de consec-loss-breaker!). Week sloot ~4448-4459; zondag-reopen 4459 = pal op de oude 4432/4448-dubbeltop = breakout-base = HET support-niveau voor de nieuwe week."
     },
     {
       "id": "2026-08-24-trend-pullback-long-4603",
