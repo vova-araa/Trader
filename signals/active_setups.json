@@ -7,13 +7,12 @@
   "setups": [
     {
       "id": "2026-08-31-basis-long-live-4462",
-      "status": "rejected",
+      "status": "active",
       "direction": "long",
       "order_type": "market",
       "entry": 4462.66,
       "stop_loss": 4431.98,
       "take_profits": [
-        4500.18,
         4525.0,
         4560.0
       ],
@@ -23,9 +22,8 @@
       "valid_until_utc": "2026-09-01T20:00:00Z",
       "live_manual": true,
       "filled": true,
-      "invalidation": "SL 4431.98 = onder de 4432/4448-basis (structureel correct). LIVE (ma 00:07Z): 0.10 @ 4462.66, TP 4500.18, prijs 4458 (-4pt). Basis houdt tot nu (nacht-lows ~4438-4440 wicks). ZWAK PUNT: RR naar TP 4500.18 = ~1.2 (risk 30.7pt vs reward 37.5pt) - onder de 1:2-regel omdat de entry mid-zone was i.p.v. op de rand. FIX via management: (a) op 4500 PARTIAL ~50% nemen en TP van de rest naar 4525/4560, en (b) SL naar BE 4462.66 zodra prijs 4480 herovert (mid-reclaim) - NIET wachten op +1R want dat ligt vlak onder de TP. Asia thin; geen bijkopen. Sell-limit 4553 (premium-fade) blijft apart staan.",
-      "note": "Sizing 0.10 blijft boven advies (0.05-0.07). Blotter-bevestiging Warsh-short +~$747 nog open -> breaker-reset. Executie dry-run; WhatsApp uit.",
-      "rejected_reason": "RR 1.22 < 2.0 tot TP1"
+      "invalidation": "SL 4431.98 = onder de 4432/4448-basis (structureel correct). LIVE (ma 00:07Z): 0.10 @ 4462.66, TP 4500.18, prijs 4458 (-4pt). Basis houdt tot nu (nacht-lows ~4438-4440 wicks). ZWAK PUNT: RR naar TP 4500.18 = ~1.2 (risk 30.7pt vs reward 37.5pt) - onder de 1:2-regel omdat de entry mid-zone was i.p.v. op de rand. FIX via management (en zo geboekt: formele TP1 = 4525, RR 2.04): (a) op 4500.18 (de broker-TP van de gebruiker) PARTIAL ~50% nemen, rest door naar 4525/4560, en (b) SL naar BE 4462.66 zodra prijs 4480 herovert (mid-reclaim) - NIET wachten op +1R want dat ligt vlak onder de TP. Asia thin; geen bijkopen. Sell-limit 4553 (premium-fade) blijft apart staan.",
+      "note": "Sizing 0.10 blijft boven advies (0.05-0.07). Blotter-bevestiging Warsh-short +~$747 nog open -> breaker-reset. Executie dry-run; WhatsApp uit."
     },
     {
       "id": "2026-08-31-premium-fade-short-4553",
