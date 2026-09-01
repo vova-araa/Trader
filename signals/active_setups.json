@@ -1,13 +1,75 @@
 {
   "version": 1,
-  "updated_utc": "2026-08-31T00:08:30Z",
+  "updated_utc": "2026-09-01T12:18:56Z",
   "kill_switch": false,
   "instrument": "XAUUSD",
   "notes": "Machine-leesbaar signaalbestand. Executor plaatst ALLEEN setups met conviction A of B en status 'active'. kill_switch=true => alle pending orders van de executor annuleren en niets plaatsen.",
   "setups": [
     {
-      "id": "2026-08-31-basis-long-live-4462",
+      "id": "2026-09-01-breakdown-retest-short-4428",
       "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4428.0,
+      "stop_loss": 4448.0,
+      "take_profits": [
+        4380.0,
+        4350.0,
+        4312.0
+      ],
+      "conviction": "A",
+      "regime": "trend",
+      "htf_bias": "bearish",
+      "valid_until_utc": "2026-09-03T20:00:00Z",
+      "live_manual": true,
+      "invalidation": "H1-close boven 4448 = de gebroken basis is heroverd, breakdown was een fake -> setup dood. DE setup van de week: di 01-09 brak de 4432/4448-basis (die de hele aug-rally droeg en 4x getest was) DECISIEF -> low 4363. Gebroken support = resistance. Sell-limit 4428 = onderkant van de oude basis + OTE 62-79% van de 4460->4363-leg (4423-4440). Stop 4448 boven de zone (20pt), doelen 4380 (RR 2.4) / 4350 / 4312 (oude limit-zone gebruiker). Macro-mee: Warsh hawkish, sept-hike ~64% gepricet, yields+DXY sterk, olie >$90. NIET vooruit shorten op 4370 (mid-range, Rule: rand-trades only). Event-regels: ISM+JOLTS vandaag 14:00 UTC en NFP vr 12:30 UTC - geen verse entry 30min ervoor; gevulde positie VOOR NFP naar BE of dicht (Rule 12/22).",
+      "note": "A-setup week 01-05/09. Klein (0.05-0.07), BE bij +1R VERPLICHT + partial op TP1 (Rules 22-24). Expiry do 20:00Z = bewust VOOR NFP-vrijdag. Executie dry-run; WhatsApp uit."
+    },
+    {
+      "id": "2026-09-01-bounce-fade-short-4402",
+      "status": "active",
+      "direction": "short",
+      "order_type": "limit",
+      "entry": 4402.0,
+      "stop_loss": 4418.0,
+      "take_profits": [
+        4366.0,
+        4350.0,
+        4330.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bearish",
+      "valid_until_utc": "2026-09-03T20:00:00Z",
+      "live_manual": true,
+      "invalidation": "H1-close boven 4418 = bounce is sterker dan een dead-cat -> dan wacht op de 4428-4440 zone (setup 1). Ondiepere variant: 4400 (rond getal, psych) + de intraday breakdown-shelf 4395-4405 waar de val versnelde + 38-50% retrace van 4460->4363. Entry 4402, stop 4418 (16pt), doelen 4366 (RR 2.25) / 4350 / 4330. SAMEN met de 4428-short is dit een ladder op dezelfde thesis: kies er EEN of size beide op halve grootte (samen max 0.07-0.10). Zelfde event-regels: ISM/JOLTS 14:00Z vandaag, NFP vr 12:30Z.",
+      "note": "B-setup (ondieper, grotere kans op fill, iets minder RR). Klein, BE bij +1R + partial op TP1. Executie dry-run; WhatsApp uit."
+    },
+    {
+      "id": "2026-09-01-deep-support-long-4306",
+      "status": "rejected",
+      "direction": "long",
+      "order_type": "limit",
+      "entry": 4306.0,
+      "stop_loss": 4288.0,
+      "take_profits": [
+        4350.0,
+        4380.0,
+        4400.0
+      ],
+      "conviction": "B",
+      "regime": "trend",
+      "htf_bias": "bearish",
+      "valid_until_utc": "2026-09-03T20:00:00Z",
+      "live_manual": true,
+      "invalidation": "H1-close onder 4288 = 4300-support faalt, dan 4250/4187 en is de bredere bull-structuur in gevaar (research: 4187 = HET niveau). COUNTER-trend long, dus strengere eisen: alleen op een SWEEP van 4300-4310 (oude breakout-base + rond 4300 + 61.8% van de 4225->4448-leg + jouw oude limit-zone 4304/4315) gevolgd door een m15-rejectionwick of reclaim - GEEN blinde knife-catch. Entry 4306, stop 4288 (18pt), doelen 4350 (RR 2.4) / 4380 / 4400. NIET actief tijdens NFP-venster (vr 12:00-14:00 UTC): limit weghalen of pas erna zetten. Dit is de flush-vanger; de shorts hierboven zijn het hoofdplan.",
+      "note": "B-setup counter-trend, half formaat (0.03-0.05). Rules 22-24: BE bij +1R, partial op TP1, niet middelen. Executie dry-run; WhatsApp uit.",
+      "rejected_reason": "long tegen een bearish HTF-trend — niet toegestaan [Rule 14]"
+    },
+    {
+      "id": "2026-08-31-basis-long-live-4462",
+      "status": "stopped_probable",
+      "result": "WAARSCHIJNLIJK GESTOPT (Blotter TBC): di 01-09 brak de 4432/4448-basis na de 4e/5e test alsnog -> prijs door SL 4431.98 naar low ~4363. Long 0.10 @ 4462.66 -> stop-fill ~4431.98 = -30.68pt x 10oz = ~-$307 = -1R. GEEN Rule-22-falen dit keer: de BE-voorwaarde (4480-reclaim) is nooit gehaald, prijs kwam na entry niet boven ~4466 - dit was het geaccepteerde risico dat gewoon afliep. De les zit een stap eerder (Rule 17): entry was mid-zone i.p.v. op de rand, waardoor de RR naar de broker-TP maar ~1.2 was. Multi-TP's 4500.18/4524.72/4549.87 zijn met de positie mee gecanceld.",
       "direction": "long",
       "order_type": "market",
       "entry": 4462.66,
@@ -27,7 +89,8 @@
     },
     {
       "id": "2026-08-31-premium-fade-short-4553",
-      "status": "active",
+      "status": "expired",
+      "result": "NIET gevuld: de premium-bounce naar 4553 kwam nooit - prijs brak juist OMLAAG (4432-basis stuk, low 4363 op di 01-09). Thesis (short in premium) was richting-correct, alleen bood de markt de mooie entry niet. ADVIES: cancel de sell-limit 4553 bij de broker (staat 180pt boven de markt = stale); de nieuwe short-zone is 4400-4440 (zie 2026-09-01-setups).",
       "direction": "short",
       "order_type": "limit",
       "entry": 4553.0,
